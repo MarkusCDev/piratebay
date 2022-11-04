@@ -3,7 +3,7 @@ import './App.css';
 
 export const Home = () => {
   return (
-    <div>Homepage</div>
+    <div>Homepage1up</div>
   )
 }
 
