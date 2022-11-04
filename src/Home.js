@@ -1,4 +1,5 @@
 import React from 'react'
+import './App.css';
 
 export const Home = () => {
   return (
@@ -7,4 +8,4 @@ export const Home = () => {
 }
 
 
-export default Home
+export default Home;
