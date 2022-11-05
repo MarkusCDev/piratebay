@@ -5,7 +5,7 @@ import './App.css';
 export const Home = () => {
   return (
     <div className='page_wrap'>
-        Home page
+        Home Page
     </div>
   )
 }
