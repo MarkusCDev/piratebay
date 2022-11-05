@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Counter from './components/counter';
+import Home from './Home';
 
 
 
