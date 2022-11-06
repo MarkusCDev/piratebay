@@ -1,14 +1,10 @@
 import React from 'react'
-import './App.css';
-
 
 export const Home = () => {
   return (
-    <div className='page_wrap'>
-        Home Change
-    </div>
+    <div>Homepage</div>
   )
 }
 
 
-export default Home;
+export default Home
