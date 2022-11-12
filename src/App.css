@@ -4,20 +4,18 @@ App{
 
 nav{
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 10vh;
-  background: #dde0ab;
+  min-height: 5vh;
+  background: #cfcfcfc9;
   color: white;
-
+  text-decoration: none;
 }
 
 .nav-links{
   width: 50%;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
   list-style: none;
+  margin-left: 90%;
+  text-decoration: none;
 }
 
 #page-wrap {

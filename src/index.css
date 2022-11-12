@@ -4,12 +4,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #feffdf;
+  background-color: #ffffff;
   margin: auto;
-  width: 60%;
-  padding: 10px;
-  padding-top: 0px;
   margin: top;
+  text-align: center;
 }
 
 code {

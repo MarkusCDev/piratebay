@@ -5,6 +5,7 @@ import Login from './Login';
 import Profile from './Profile';
 
 import { Link, Route, Routes } from "react-router-dom";
+import HomePgIMGS from './HomePgIMGS';
 
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     <div className="App">
       <Nav />
       <Routes>
-      <Route path="/" element={<Home />}/>
+      <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />}/>
       <Route path="/profile" element={<Profile />}/>
       </Routes>
