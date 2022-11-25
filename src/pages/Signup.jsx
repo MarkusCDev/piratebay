@@ -5,6 +5,10 @@ import { Button } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
 
 const Signup = () => {
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [dob, setDob] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +32,41 @@ const Signup = () => {
       <div className="container w-40 p-3 mt-5 d-flex align-item justify-content-center">
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
+          
+        <Form.Group className="mb-3" controlId="formBasicFname">
+            <Form.Control
+              type="fname"
+              placeholder="First name"
+              onChange={(e) => setFname(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicLname">
+            <Form.Control
+              type="lname"
+              placeholder="Last name"
+              onChange={(e) => setLname(e.target.value)}
+            />
+          </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPhone">
+            <Form.Control
+              type="phone"
+              placeholder="Phone"
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </Form.Group>
+          
+          <Form.Group className="mb-3" controlId="formBasicDob">
+            <Form.Control
+              type="DOB"
+              placeholder="mm/dd/yr"
+              onChange={(e) => setDob(e.target.value)}
+            />
+          </Form.Group>
+          
+          
+          
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
               type="email"
@@ -43,6 +82,11 @@ const Signup = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
+
+
+          
+
+
 
           <div className="d-grid gap-2">
             <Button variant="primary" type="Submit">
