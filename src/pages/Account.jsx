@@ -18,7 +18,7 @@ const Account = () => {
   }
 
   return (
-    <div className='container' style={{marginTop: '200px'}}>
+    <div className='row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-md-5' style={{marginTop: '200px'}}>
       <div className='justify-content-center align-items'>
           Email Address: {user && user.email}
       </div>
