@@ -1,23 +1,37 @@
-import Home from './Home';
 import './App.css';
-import Nav from './Nav';
-import Login from './Login';
-import Profile from './Profile';
+import React from 'react'
+import Navbar from './components/Navbar';
+import { Footer } from './components/Footer';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+import Account from './pages/Account';
+import Cart from './pages/Cart';
+import ProductList from './pages/ProductList';
+import Product1 from './pages/Product1';
+import { UserAuthContextProvider } from './context/UserAuthContext';
+import ProtectedRoute from './context/ProtectedRoute';
 
-import { Link, Route, Routes } from "react-router-dom";
-
-
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Nav />
+    <UserAuthContextProvider>
+      <Navbar />
       <Routes>
-      <Route path="/" element={<Home />}/>
-      <Route path="/login" element={<Login />}/>
-      <Route path="/profile" element={<Profile />}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        
+        <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/products/1" element={<Product1 />} />
       </Routes>
-    </div>
-  );
+      <Footer />
+    </UserAuthContextProvider>
+  )
 }
 
-export default App;
+export default App
