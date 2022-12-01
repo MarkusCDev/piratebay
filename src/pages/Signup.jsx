@@ -29,8 +29,8 @@ const Signup = () => {
   return (
     <>
     <div style = {{ marginTop: '200px'}}><h2 className="Auth-form-title text-center">Sign Up</h2></div>
-      <div className="container w-40 p-3 mt-5 d-flex align-item justify-content-center">
-        {error && <Alert variant="danger">{error}</Alert>}
+    <div className="container w-40 pt-3 d-flex align-item justify-content-center">{error && <Alert variant="danger">{error}</Alert>} </div>
+      <div className="container w-40 d-flex align-item justify-content-center">
         <Form onSubmit={handleSubmit}>
           
         <Form.Group className="mb-3" controlId="formBasicFname">
@@ -96,7 +96,7 @@ const Signup = () => {
         </Form>
       </div>
       <div className="p-4 box mt-3 text-center">
-        Already have an account? <Link to="/">Log In</Link>
+        Already have an account? <Link to="/login">Log In</Link>
       </div>
     </>
   );

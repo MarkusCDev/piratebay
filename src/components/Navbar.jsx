@@ -42,14 +42,8 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <Link to="/Cart">
-          <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
-            <img src={cart} alt="cart logo" style={{width: '30px', height: '30px'}} />
-            <span className="ms-3 badge rounded-pill bg-dark">0</span>
-          </button>
-          </Link>
           <Link to="/login" className="nav-link">
-              <button onClick={handleLogout} className="btn btn-primary" variant="primary">
+              <button className="btn btn-primary" variant="primary">
               Login/SignUp
             </button>
               </Link>
