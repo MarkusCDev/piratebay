@@ -31,7 +31,7 @@ const Account = () => {
     </Form.Label> </Form.Group>
     <Form.Group className="mb-3" controlId="formBasicCard">
         <Form.Label><b >Cardinfo: {user&& user.card} </b></Form.Label>
-        <Form.Control type="new_card" placeholder= "enter new card number" />
+        <Form.Control type="new_card" placeholder= "XXXX-XXXX-XXXX-XXXX" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formOldPassword">
         <Form.Label><b>Old Password: {user && user.password} </b></Form.Label>
