@@ -53,7 +53,7 @@ function Product1() {
             <div className="row g-3 mb-4">
               <div className="col">
                 <button className="btn btn-outline-dark py-2 w-100">
-                  Add to cart
+                  Bid: $150
                 </button>
               </div>
               <div className="col">
