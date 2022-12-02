@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { FormLabel } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
 import { FormGroup, FormInput, Input, Form, Select, FormField, Button, Checkbox, Label, Icon } from 'semantic-ui-react'
 
@@ -137,7 +138,9 @@ class CheckoutPage extends Component {
                                     <label style={{ color: 'red', fontSize: '25px' }}> * Required Field </label>
                                 </FormField>
                                 <FormGroup>
-                                    <Button content='Submit' />
+                                    <Link to='/cart'>
+                                        <Button content='Checkout' />
+                                    </Link>
                                 </FormGroup>
                                 <FormGroup>
                                     <Button circular icon='google pay' color='twitter' size='huge' />
