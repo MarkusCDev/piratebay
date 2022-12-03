@@ -74,6 +74,23 @@ class CheckoutPage extends Component {
                                 <FormGroup>
                                     <FormInput required={'true'}
                                         control={Input}
+                                        name='name'
+                                        label='Name'
+                                        placeholder='Name'
+                                        value={name}
+                                        onChange={this.handleChange}
+                                    />
+                                    <FormInput required={'true'}
+                                        control={Input}
+                                        name='email'
+                                        label='Email'
+                                        placeholder='Email'
+                                        onChange={this.handleChange}
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <FormInput required={'true'}
+                                        control={Input}
                                         name='address1'
                                         label='Address 1'
                                         placeholder='Address 1'
