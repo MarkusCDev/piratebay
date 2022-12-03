@@ -30,22 +30,22 @@ const Account = () => {
         <Form.Label><b>Name: </b>{user && user.fname} , {user &&user.lname}  
     </Form.Label> </Form.Group>
     <Form.Group className="mb-3" controlId="formBasicCard">
-        <Form.Label><b >Cardinfo: {user&& user.card} </b></Form.Label>
-        <Form.Control type="new_card" placeholder= "enter new card number" />
+        <Form.Label><b >Card Number: {user&& user.card} </b></Form.Label>
+        <Form.Control type="new_card" placeholder= "XXXX-XXXX-XXXX-XXXX" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formOldPassword">
         <Form.Label><b>Old Password: {user && user.password} </b></Form.Label>
-        <Form.Control type="password" placeholder="Confirm old password" />
+        <Form.Control type="password" placeholder="Confirm Old Password" />
       </Form.Group>
       
       <Form.Group className="mb-3" controlId="formNewPassword">
         <Form.Label><b>New Password:  </b></Form.Label>
-        <Form.Control type="new_password" placeholder= "change password" />
+        <Form.Control type="new_password" placeholder= "Change Password" />
       </Form.Group>
       
       <Form.Group className="mb-3" controlId="formBasicPasswordChange">
         <Form.Label><b>Confirm Password Change: </b></Form.Label>
-        <Form.Control type="new_password" placeholder="re-enter new pass-word" />
+        <Form.Control type="new_password" placeholder="Re-enter New Password" />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formDOB">
