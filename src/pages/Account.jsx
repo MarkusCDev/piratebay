@@ -3,6 +3,7 @@ import { useUserAuth } from '../context/UserAuthContext'
 import { Button } from "react-bootstrap";
 import { Navigate } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 const Account = () => {
 
 
@@ -19,7 +20,7 @@ const Account = () => {
 
   return (
     <div className='row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-md-5' style={{marginTop: '200px'}}>
-      <div className='justify-content-center align-items'>
+      <div className='justify-content-center align-items container d-flex shadow p-3 mb-5 bg-white rounded' >
       <Form>
      
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -29,10 +30,12 @@ const Account = () => {
       <Form.Group className="mb-3" controlId="formBasicName">
         <Form.Label><b>Name: </b>{user && user.fname} , {user &&user.lname}  
     </Form.Label> </Form.Group>
+
     <Form.Group className="mb-3" controlId="formBasicCard">
         <Form.Label><b >Card Number: {user&& user.card} </b></Form.Label>
         <Form.Control type="new_card" placeholder= "XXXX-XXXX-XXXX-XXXX" />
       </Form.Group>
+
       <Form.Group className="mb-3" controlId="formOldPassword">
         <Form.Label><b>Old Password: {user && user.password} </b></Form.Label>
         <Form.Control type="password" placeholder="Confirm Old Password" />
@@ -53,7 +56,7 @@ const Account = () => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formphonenumber">
-        <Form.Label><b > Phonenumber: {user&& user.phone} </b></Form.Label>
+        <Form.Label><b > Phone Number: {user&& user.phone} </b></Form.Label>
       </Form.Group>
       
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -65,10 +68,11 @@ const Account = () => {
         Submit changes
             
       </Button>
-      <Button variant="dark" type="deposit/withdraw">
+      <Link to="/depositwithdraw"><Button variant="dark" type="deposit/withdraw">
         Deposit/Withdraw
             
       </Button>
+      </Link>
     </Form> 
         
       </div>
