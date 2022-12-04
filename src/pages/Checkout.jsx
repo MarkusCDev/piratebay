@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { FormLabel } from 'react-bootstrap'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
+import { database } from "../firebase-config";
 import { FormGroup, FormInput, Input, Form, Select, FormField, Button, Checkbox, Label, Icon } from 'semantic-ui-react'
+import { useUserAuth } from '../context/UserAuthContext';
 
 const stateOptions = [
     { key: 'AL', text: 'Alabama', value: 'Alabama' },
@@ -58,119 +60,138 @@ const stateOptions = [
     { key: 'DC', text: 'District of Columbia', value: 'District of Columbia' },
 ]
 
-class CheckoutPage extends Component {
-    state = {}
-    handleChange = (e, { address1, value }) => this.setState({ [address1]: value })
-    handleSubmit = () => this.setState({ address1: '' })
-    render() {
-        const { address1, city, state, zipcode, name, cardnumber } = this.state
-        return (
-            <div>
-                <div className='d-flex flex-column bg-white py-4 mt-5 align-items-center justify-content-left'>
-                    <div className='d-flex justify-content-center'>
-                        <div>
-                            <h3><u> Shipping address </u></h3>
-                            <Form widths={'equal'} className='align-items-center'>
-                                <FormGroup>
-                                    <FormInput required={'true'}
-                                        control={Input}
-                                        name='name'
-                                        label='Name'
-                                        placeholder='Name'
-                                        value={name}
-                                        onChange={this.handleChange}
-                                    />
-                                    <FormInput required={'true'}
-                                        control={Input}
-                                        name='email'
-                                        label='Email'
-                                        placeholder='Email'
-                                        onChange={this.handleChange}
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <FormInput required={'true'}
-                                        control={Input}
-                                        name='address1'
-                                        label='Address 1'
-                                        placeholder='Address 1'
-                                        value={address1}
-                                        onChange={this.handleChange}
-                                    />
+const CheckoutPage = () => {
 
-                                    <FormInput
-                                        label='Address 2 (Optional)'
-                                        placeholder='Address 2'
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <FormInput required={'true'}
-                                        label='City'
-                                        placeholder='City'
-                                        name='city'
-                                        value={city}
-                                    />
-                                    <FormInput required={'true'}
-                                        control={Select}
-                                        label='State'
-                                        placeholder='State'
-                                        name='state'
-                                        value={state}
-                                        options={stateOptions}
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <FormInput required={'true'}
-                                        label='Zipcode'
-                                        placeholder='Zipcode'
-                                        name='zipcode'
-                                        value={zipcode}
-                                    />
-                                </FormGroup>
-                            </Form>
-                        </div>
-                    </div>
-                    <div className='d-flex justify-content-center'>
-                        <div>
-                            <h3><u>Credit Card Information</u></h3>
-                            <p><b> Please fill out your card information.</b></p>
-                            <Form widths={'equal'} className='align-items-left'>
-                                <FormGroup>
-                                    <FormInput required={'true'}
-                                        control={Input}
-                                        label='Name on card'
-                                        placeholder='John Doe'
-                                        name='name'
-                                        value={name}
-                                    />
-                                    <FormInput required={'true'}
-                                        label='Card Number'
-                                        placeholder='Card number'
-                                        name='cardnumber'
-                                        value={cardnumber}
-                                    />
-                                </FormGroup>
-                                <FormField control={Checkbox} label='I agree to the Terms and Conditions' />
-                                <FormField>
-                                    <label style={{ color: 'red', fontSize: '25px' }}> * Required Field </label>
-                                </FormField>
-                                <FormGroup>
-                                    <Link to='/cart'>
-                                        <Button content='Checkout' />
-                                    </Link>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Button circular icon='google pay' color='twitter' size='huge' />
-                                    <Button circular icon='amazon pay' color='twitter' size='huge' />
-                                    <Button circular icon='apple pay' color='twitter' size='huge' />
-                                </FormGroup>
-                            </Form>
-                        </div>
+    const { user } = useUserAuth();
+
+    // User info
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+
+    // Shipping address & Card info
+    const [address1, setAddress] = useState('');
+    const [city, setCity] = useState();
+    const [stateName, setStateName] = useState();
+    const [zipcode, setZipcode] = useState('');
+    const [cardnumber, setCardNumber] = useState('');
+
+    const Push = () => {
+        database.ref("user").set({
+            city: city,
+            stateName: stateName,
+        }).catch(alert);
+    }
+
+    return (
+        <div>
+            <div className='d-flex flex-column bg-white py-4 mt-5 align-items-center justify-content-left'>
+                <div className='d-flex justify-content-center'>
+                    <div>
+                        <h3><u> Shipping address </u></h3>
+                        <Form widths={'equal'} className='align-items-center'>
+                            <FormGroup>
+                                <FormInput required={'true'}
+                                    control={Input}
+                                    name='name'
+                                    label='Name'
+                                    placeholder='Name'
+                                // value={name}
+                                />
+                                <FormInput required={'true'}
+                                    control={Input}
+                                    name='email'
+                                    label='Email'
+                                    placeholder='Email'
+                                    type='email'
+                                    value={user && user.email}
+                                // onChange={setEmail}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <FormInput required={'true'}
+                                    control={Input}
+                                    name='address1'
+                                    label='Address 1'
+                                    placeholder='Address 1'
+                                // value={address1}
+                                // onChange={setAddress}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <FormInput required={'true'}
+                                    label='City'
+                                    placeholder='City'
+                                    name='city'
+                                    onChange={(e) => setCity(e.target.value)}
+                                // value={city}
+                                // onChange={setCity}
+                                />
+                                <FormInput required={'true'}
+                                    control={Select}
+                                    label='State'
+                                    placeholder='State'
+                                    name='state'
+                                    options={stateOptions}
+                                    onChange={(e) => setStateName(e.target.value)}
+                                // value={stateName}
+                                // onChange={setStateName}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <FormInput required={'true'}
+                                    label='Zipcode'
+                                    placeholder='Zipcode'
+                                    name='zipcode'
+                                    type='number'
+                                // value={zipcode}
+                                // onChange={setZipcode}
+                                />
+                            </FormGroup>
+                        </Form>
                     </div>
                 </div>
-            </div >
-        )
-    }
+                <div className='d-flex justify-content-center'>
+                    <div>
+                        <h3><u>Credit Card Information</u></h3>
+                        <p><b> Please fill out your card information.</b></p>
+                        <Form widths={'equal'} className='align-items-left'>
+                            <FormGroup>
+                                <FormInput required={'true'}
+                                    control={Input}
+                                    label='Name on card'
+                                    placeholder='John Doe'
+                                    name='name'
+                                // value={name}
+                                />
+                                <FormInput required={'true'}
+                                    label='Card Number'
+                                    placeholder='Card number'
+                                    name='cardnumber'
+                                    type='number'
+                                // value={cardnumber}
+                                />
+                            </FormGroup>
+                            <FormField control={Checkbox} label='I agree to the Terms and Conditions' />
+                            <FormField>
+                                <label style={{ color: 'red', fontSize: '25px' }}> * Required Field </label>
+                            </FormField>
+                            <FormGroup>
+                                {/* <Link to='/cart'>
+                                    <Button content='Checkout' />
+                                </Link> */}
+                                <Button onClick={Push}>Submit</Button>
+                            </FormGroup>
+                            <FormGroup>
+                                <Button circular icon='google pay' color='twitter' size='huge' />
+                                <Button circular icon='amazon pay' color='twitter' size='huge' />
+                                <Button circular icon='apple pay' color='twitter' size='huge' />
+                            </FormGroup>
+                        </Form>
+                    </div>
+                </div>
+            </div>
+        </div >
+    )
 }
 
 export default CheckoutPage
