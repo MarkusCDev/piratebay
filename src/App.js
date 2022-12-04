@@ -17,6 +17,7 @@ import { UserAuthContextProvider } from './context/UserAuthContext';
 import ProtectedRoute from './context/ProtectedRoute';
 import Secret from './pages/Secret';
 import CheckoutPage from './pages/Checkout';
+import Additem from './pages/Additem';
 
 const App = () => {
   return (
@@ -28,7 +29,8 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/account/add-item" element={<ProtectedRoute><Additem /></ProtectedRoute>} />
+        <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/products/1" element={<Product1 />} />
         <Route path="/checkout" element={<ProtectedRoute> <CheckoutPage /> </ProtectedRoute>} />

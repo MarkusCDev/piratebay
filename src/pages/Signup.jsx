@@ -3,8 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
+import { db } from "../firebase-config";
+import { setDoc, doc, addDoc, collection } from "firebase/firestore";
 
 const Signup = () => {
+
+  const {user} = useUserAuth();
+
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [phone, setPhone] = useState("");
@@ -20,11 +25,43 @@ const Signup = () => {
     setError("");
     try {
       await signUp(email, password);
+      await addUserdata()
       navigate("/");
     } catch (err) {
       setError(err.message);
     }
   };
+  
+  const dbRef = collection(db, 'Users');
+
+  // const docRef = doc(db, 'Users', email)
+  // const data = {
+  //   email: {email},
+  //     password: {password},
+  //     fname: {fname},
+  //     lname: {lname},
+  //     phone: {phone},
+  //     dob: {dob},
+  // }
+
+
+   const addUserdata = async (e) => {
+    await setDoc(doc(db, 'Users', email), {
+      email,
+      password,
+      fname,
+      lname,
+      phone,
+      dob
+    })
+    // await setDoc(docRef, data)
+    .then(docRef => {
+            console.log("Document Id:", docRef.id)
+          }).catch(error => {
+            console.log("Error adding document:", error)
+          })
+   }
+
 
   return (
     <>
