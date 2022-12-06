@@ -10,12 +10,12 @@ const Home = () => {
     <>
     <div>
 
-        <img src={img} alt="background" style={{height: '400px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover'}}></img>
-        
+        {/* <img src={img} alt="background" style={{height: '400px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover'}}></img>
+         */}
 
         <div className="d-flex flex-column bg-white py-4">
         <div className="d-flex justify-content-center">
-          <Link to="/products" className="btn btn-primary" replace>
+          <Link to="/products" className="btn btn-primary" replace style={{'margin-top': '30px'}}>
             Browse Products
           </Link>
         </div>
