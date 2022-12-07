@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import cart from '../images/cart.png';
-import { Button, Navbar } from "react-bootstrap";
+import { Button, Navbar, NavItem, NavLink } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
 import pfp from '../images/pfp.png';
 import { Navigate } from 'react-router-dom';
@@ -29,7 +29,8 @@ const Nav = () => {
    return (
     <header>
     {/* <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom"> */}
-    <div className="container-fluid">
+    <Navbar style={{backgroundColor : "orange"}}>
+        <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <span className="ms-2 h5">PirateBay</span>
         </Link>
@@ -44,20 +45,21 @@ const Nav = () => {
           </ul>
           <Link to="/login" className="nav-link">
               <button className="btn btn-primary" variant="primary">
-              Login/SignUp
+              Login / SignUp
             </button>
               </Link>
 
         </div>
 
       </div>
+      </Navbar>
   </header>
   )
   }
   
   return (
     <header>
-      
+      <Navbar color="light">
     {/* <Nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom"> */}
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
@@ -93,7 +95,7 @@ const Nav = () => {
 
       </div>
     {/* </nav> */}
-
+    </Navbar>
   </header>
   )
 }

@@ -3,18 +3,17 @@ import img from '../images/banner.jpg';
 import im from '../images/lightBLUE.jpg.jpg';
 import { Link } from 'react-router-dom';
 import PopularProduct from './PopularProduct';
-
+import ProductSlider from '../components/ProductSlider';
 
 const Home = () => {
   return (
-    <div style={{backgroundColor:"red"}}>
-         <div className="d-flex flex-column bg-white py-4">
+    <div>
+        <ProductSlider />
+         <div className="d-flex flex-column py-4">
          <div className="d-flex justify-content-center">
-           <Link to="/products" className="btn btn-primary" replace style={{'margin-top': '30px'}}>
+           <Link to="/products" className="btn btn-primary" replace>
             Browse Products
           </Link>
-
-          
          </div>
        </div>
 

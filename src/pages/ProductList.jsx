@@ -5,9 +5,8 @@ import search from "../images/search.png"
 function ProductList() {
   const [viewType] = useState({ grid: true });
 
-
   return (
-    <div className="container mt-5 py-4 px-xl-5 justify-content-center">
+    <div className="container py-4 px-xl-5 justify-content-center">
       <div className="row mb-4 mt-lg-3">
           <div className="d-flex flex-column h-100">
             <div className="row mb-3">

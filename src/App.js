@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./css/space.css";
 import { Route, Routes } from 'react-router-dom';
+import Nav from './components/Nav'
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -21,8 +22,10 @@ import Additem from './pages/Additem';
 
 const App = () => {
   return (
-    <div style={{backgroundColor:"red"}}>
     <UserAuthContextProvider>
+      <Nav/>
+      <div style={{backgroundColor:"red"}}>
+   
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/secret" element={<Secret />} />
@@ -38,8 +41,9 @@ const App = () => {
       </Routes>
       
       <Footer />
+      </div>
+  
     </UserAuthContextProvider>
-    </div>
   )
 }
 
