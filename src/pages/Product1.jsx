@@ -1,4 +1,5 @@
 import Image from "../images/psword.jpg";
+import im from "../images/lightBLUE.jpg.jpg";
 import { Link } from "react-router-dom";
 
 
@@ -47,7 +48,7 @@ function Product1() {
 
         <div className="col-lg-5">
           <div className="d-flex flex-column h-100">
-            <h2 className="mb-1">Pirate Sword</h2>
+            <h2 className="mb-1">Pirate sword</h2>
             <h4 className="text-muted mb-4">$1,000 USD</h4>
 
             <div className="row g-3 mb-4">

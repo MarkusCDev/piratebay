@@ -8,8 +8,12 @@ html, body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
+} 
+/* body{
+  background-image: 'C:/Users/carol/OneDrive/Pictures/Documents/GitHub/piratebay/src/images/lightBLUE.jpg.jpg';
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

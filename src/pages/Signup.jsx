@@ -3,8 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
+// <<<<<<< Updated upstream
 import { db } from "../firebase-config";
 import { setDoc, doc, addDoc, collection } from "firebase/firestore";
+
+import im from '../images/lightBLUE.jpg.jpg';
+
+// >>>>>>> Stashed changes
 
 const Signup = () => {
 
@@ -30,6 +35,8 @@ const Signup = () => {
     } catch (err) {
       setError(err.message);
     }
+
+
   };
   
   const dbRef = collection(db, 'Users');
@@ -63,15 +70,28 @@ const Signup = () => {
    }
 
 
+
+
+
+
   return (
     <>
+{/* <<<<<<< Updated upstream */}
     <div style = {{ marginTop: '50px'}}><h2 className="Auth-form-title text-center">Sign Up</h2></div>
+=======
+
+  
+
+    <div style = {{ marginTop: '200px'}}><h2 className="Auth-form-title text-center">Sign Up</h2></div>
+{/* >>>>>>> Stashed changes */}
     <div className="container w-40 pt-3 d-flex align-item justify-content-center">{error && <Alert variant="danger">{error}</Alert>} </div>
       <div className="container w-40 d-flex align-item justify-content-center">
+        
         <Form onSubmit={handleSubmit}>
-          
+
         <Form.Group className="mb-3" controlId="formBasicFname">
             <Form.Control
+            
               type="fname"
               placeholder="First name"
               onChange={(e) => setFname(e.target.value)}
@@ -135,6 +155,7 @@ const Signup = () => {
       <div className="p-4 box mt-3 text-center">
         Already have an account? <Link to="/login">Log In</Link>
       </div>
+    
     </>
   );
 };

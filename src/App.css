@@ -8,3 +8,7 @@ App{
 .pt-50 {
   margin-top: 50px;
 }
+
+.main-container{
+  background-color: red;
+}
