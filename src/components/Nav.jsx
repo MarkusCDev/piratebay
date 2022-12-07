@@ -29,7 +29,7 @@ const Nav = () => {
    return (
     <header>
     {/* <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom"> */}
-    <Navbar style={{backgroundColor : "orange"}}>
+    <Navbar style={{backgroundColor : "#001ff0"}}>
         <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <span className="ms-2 h5">PirateBay</span>

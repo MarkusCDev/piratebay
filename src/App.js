@@ -23,9 +23,10 @@ import Additem from './pages/Additem';
 const App = () => {
   return (
     <UserAuthContextProvider>
-      <Nav/>
-      <div style={{backgroundColor:"red"}}>
+      <div style={{backgroundColor:"lightBlue"}}>
    
+      <Nav/>
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/secret" element={<Secret />} />

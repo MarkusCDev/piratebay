@@ -1,6 +1,7 @@
 import React from 'react';
+import "../css/productslider.css"
 
-export const ProductSlider = () => {
+const ProductSlider = () => {
 
     return (
         <div class="slider">
@@ -25,3 +26,5 @@ export const ProductSlider = () => {
 
 
 }
+
+export default ProductSlider
