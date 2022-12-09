@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
-import { database } from "../firebase-config";
+import { db } from "../firebase-config";
 import { FormGroup, FormInput, Input, Form, Select, FormField, Button, Checkbox, Label, Icon } from 'semantic-ui-react'
 import { useUserAuth } from '../context/UserAuthContext';
 
@@ -76,7 +76,7 @@ const CheckoutPage = () => {
     const [cardnumber, setCardNumber] = useState('');
 
     const Push = () => {
-        database.ref("user").set({
+        db.ref("user").set({
             city: city,
             stateName: stateName,
         }).catch(alert);
@@ -150,7 +150,7 @@ const CheckoutPage = () => {
                         </Form>
                     </div>
                 </div>
-                <div className='d-flex justify-content-center'>
+                <div className='d-flex justify-content-center mt-3'>
                     <div>
                         <h3><u>Credit Card Information</u></h3>
                         <p><b> Please fill out your card information.</b></p>
@@ -176,9 +176,9 @@ const CheckoutPage = () => {
                                 <label style={{ color: 'red', fontSize: '25px' }}> * Required Field </label>
                             </FormField>
                             <FormGroup>
-                                {/* <Link to='/cart'>
-                                    <Button content='Checkout' />
-                                </Link> */}
+                                <Link to='/cart'>
+                                    <Button onClick={Push} content='Back to Cart' />
+                                </Link>
                                 <Button onClick={Push}>Submit</Button>
                             </FormGroup>
                             <FormGroup>

@@ -73,7 +73,9 @@ const handleAddProducts = (e) => {
           price,
           keywords,
           timelimit,
-          image: url
+          image: url,
+          currentbid: 0
+          
         }).then(docRef => {
                 console.log("Document Id:", docRef.id)
               }).catch(error => {

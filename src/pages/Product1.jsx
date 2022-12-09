@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 function Product1() {
 
   return (
-    <div className="container mt-5 py-4 px-xl-5">
+    <>
+    <div style = {{ marginTop: '200px '}} className="shadow-lg p-3 mb-2 bg-white rounded container">
       <div className="row mb-4">
 
         {/* Product pain photo*/}
@@ -99,6 +100,18 @@ function Product1() {
         </div>
       </div>
     </div>
+    <div style = {{ marginTop: '50px '}}>
+    <div style = {{ marginTop: '25px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
+                  Review 1
+    </div>
+    <div style = {{ marginTop: '25px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
+                  Review 2
+    </div>
+    <div style = {{ marginTop: '25px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
+                  Review 3
+    </div>
+    </div>
+    </>
   );
 }
 

@@ -10,7 +10,7 @@ const Home = () => {
     <>
     <div>
 
-        <img src={img} alt="background" style={{height: '400px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover'}}></img>
+      <img src={img} alt="background" style={{height: '400px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover'}}></img>
         
 
         <div className="d-flex flex-column bg-white py-4">

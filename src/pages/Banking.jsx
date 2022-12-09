@@ -1,0 +1,107 @@
+import React, { useState, useEffect } from "react";
+import { useUserAuth } from "../context/UserAuthContext";
+import { db } from "../firebase-config";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { useRef } from "react";
+import { Button } from "react-bootstrap";
+
+
+const Banking = () => {
+const Deposit = () => {}
+const [counter, setCounter] = useState(0)
+const {user, logOut} = useUserAuth();
+const [inputDepositRef, setDepositRef] = useState(0)
+const [inputWithdrawRef, setWithdrawRef] = useState(0)
+  const handleClick1 = async () => {
+    var x = parseInt(inputDepositRef, 10)
+    var y = userdata?.money + x
+    console.log(y)
+    console.log(typeof(userdata?.money))
+    console.log(typeof(x))
+    let z = 100
+    const docRef = doc(db, "Users", user.email)
+    await updateDoc(docRef, {
+        money: y
+    });
+
+    window.location.reload(true)
+  }
+
+
+  const handleClick2 = async () => {
+    var x = parseInt(inputWithdrawRef, 10)
+
+    if (x > userdata?.money){
+      var y = userdata?.money
+    }
+    else {
+      var y = userdata?.money - x
+    }
+
+
+    const docRef = doc(db, "Users", user.email)
+    await updateDoc(docRef, {
+        money: y
+    });
+
+    window.location.reload(true)
+  }
+
+  const [userdata, setUserData] = useState(null);
+
+const retdata = async () => {
+  const docRef = doc(db, "Users", user.email)
+  const docSnap = await getDoc(docRef)
+    setUserData(docSnap.data())
+}
+  useEffect(()=>{
+           retdata();
+       }, [user])
+
+  return (
+    <div style = {{ marginTop: '200px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
+      <div><h2 className="text-center">Banking</h2></div>
+      
+
+        <div className="mt-3">
+          <h3>Balance: ${userdata?.money}</h3>
+        </div>
+
+        <div className="mt-3">
+          <h3>Current Card: Visa 4893</h3>
+        </div>
+
+        <div className="mt-3">
+          <h3>Deposit</h3>
+          <input value={inputDepositRef} 
+          type="number"
+          placeholder="Input deposit"
+          onChange={(e)=>setDepositRef(e.target.value)}/>
+          <Button style={{marginLeft: '10px',width: '50px', height: '25px'}} className="btn btn-success"onClick={handleClick1}></Button>
+        </div>
+
+        
+        <div className="mt-3">
+          <h3>Withdraw</h3>
+          <input value={inputWithdrawRef} 
+          type="number"
+          placeholder="Input withdraw"
+          onChange={(e)=>setWithdrawRef(e.target.value)}/>
+          <Button style={{marginLeft: '10px',width: '50px', height: '25px'}} className="btn btn-danger"onClick={handleClick2}></Button>
+        </div>
+      </div>
+   
+    )
+  }
+export default Banking
+
+
+// export default depositwithdraw
+// import React from 'react'
+
+// export const depositwithdraw = () => {
+//   return (
+//     <div>depositwithdraw</div>
+//   )
+// }
+// export default depositwithdraw

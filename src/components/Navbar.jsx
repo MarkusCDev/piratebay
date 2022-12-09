@@ -5,12 +5,24 @@ import { Button } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
 import pfp from '../images/pfp.png';
 import { Navigate } from 'react-router-dom';
-
+import { snapshot, onSnapshot, getDoc, getDocs, setDoc, doc, addDoc, collection } from "firebase/firestore";
+import { db } from '../firebase-config';
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
 
   const {user, logOut} = useUserAuth();
 
+  const [userdata, setUserData] = useState(null);
+
+  const retdata = async () => {
+    const docRef = doc(db, "Users", user.email)
+    const docSnap = await getDoc(docRef)
+    setUserData(docSnap.data())
+  }
+    useEffect(()=>{
+             retdata();
+         }, [user])
 
 
   const handleLogout = async () => {
@@ -24,7 +36,7 @@ const Navbar = () => {
 
 
 
-  console.log("Check user in Private: ", user);
+  //console.log("Check user in Private: ", user.email);
   if (!user) {
    return (
     <header>
@@ -73,13 +85,19 @@ const Navbar = () => {
           <Link to="/cart">
           <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
             <img src={cart} alt="cart logo" style={{width: '30px', height: '30px'}} />
-            <span className="ms-3 badge rounded-pill bg-dark">0</span>
+            <span className="ms-2 badge rounded-pill bg-dark" style={{color: 'white'}}>0</span>
           </button>
           </Link>
 
           <Link to="/account">
           <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
             <img src={pfp} alt="user logo" style={{width: '30px', height: '30px'}} />
+          </button>
+          </Link>
+
+          <Link className="text-decoration-none " to="/account/banking">
+          <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
+            ${userdata?.money}
           </button>
           </Link>
 
