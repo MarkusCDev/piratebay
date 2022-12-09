@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import img from '../images/psword.jpg';
 import { Link } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
@@ -7,9 +7,9 @@ import { useUserAuth } from '../context/UserAuthContext';
 
 const PopularProduct = () => {
 
-  const {user} = useUserAuth();
+  const { user } = useUserAuth();
   const [userdata, setUserData] = useState(null);
-  
+
   const retdata = async () => {
     var x = "wwmZJOlVNLEy8DOEASd3"
     const docRef = doc(db, "Products", x)
@@ -17,17 +17,9 @@ const PopularProduct = () => {
     setUserData(docSnap.data())
     console.log(docSnap.data())
   }
-  useEffect(()=>{
-      retdata();
+  useEffect(() => {
+    retdata();
   }, [user])
-
-
-
-
-
-
-
-
 
   return (
     <div className="col">
