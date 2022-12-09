@@ -7,21 +7,25 @@ import { Form, Alert } from "react-bootstrap";
 import { db } from '../firebase-config';
 import { snapshot, onSnapshot, getDoc, getDocs, setDoc, doc, addDoc, collection } from "firebase/firestore";
 import { useEffect, useState } from 'react';
+import { updatePassword } from '@firebase/auth';
 
 
 const Account = () => {
 
   const {user} = useUserAuth();
   
-  // -----------------------------
 
-  // --------------------------------
+  function changePassword(newPassword) {
+    return updatePassword(user, newPassword).then(() => {
+      console.loga("Password updated")
+    }).catch(err => {
+        console.log("Password did not change")
+    });
+  }
+
   
-
   // get specific collection data
-
 const [userdata, setUserData] = useState(null);
-
 const retdata = async () => {
   const docRef = doc(db, "Users", user.email)
   const docSnap = await getDoc(docRef)
@@ -71,8 +75,8 @@ const retdata = async () => {
 
   return (
     <div className='row-cols-lg-3 g-4 px-md-5' style={{marginTop: '200px'}}>
-      <div className='justify-content-center align-items container d-flex shadow p-3 mb-5 bg-white rounded' >
-    
+      <div className='justify-content-center align-items container shadow p-3 mb-5 bg-white rounded' >
+      <h3 className='text-center'>Account Info</h3>
       {/* <button className='btn btn-success' onClick={retdata}></button> */}
       <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -89,12 +93,6 @@ const retdata = async () => {
 
       <Form.Group className="mb-3" controlId="formphonenumber">
         <Form.Label><b > Phone Number: </b>{userdata?.phone} </Form.Label>
-      </Form.Group>
-      
-
-    <Form.Group className="mb-3" controlId="formBasicCard">
-        <Form.Label><b >Card Number: {user&& user.card} </b></Form.Label>
-        <Form.Control type="new_card" placeholder= "XXXX-XXXX-XXXX-XXXX" />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formOldPassword">

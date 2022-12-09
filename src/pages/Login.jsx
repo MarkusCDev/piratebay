@@ -23,13 +23,13 @@ const Login = () => {
   };
 
 
+      
 
   return (
-    <div style = {{ marginTop: '200px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
-      <div><h2 className="Auth-form-title text-center ">Log In</h2></div>
-      <div className="container w-40 pt-2 d-flex align-item justify-content-center">{error && <Alert variant="danger">{error}</Alert>} </div>
-      <div className="d-flex align-item justify-content-center">
-
+    <div className='row-cols-lg-3 g-4 px-md-5' style={{marginTop: '200px'}}>
+    <div className='justify-content-center align-items container shadow p-3 mb-5 bg-white rounded' >
+    <h3 className="text-center">Login</h3>
+    <div className="container w-40 pt-2 d-flex align-item justify-content-center">{error && <Alert variant="danger">{error}</Alert>} </div>
         
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -55,9 +55,9 @@ const Login = () => {
           </div>
         </Form>
         <hr />
-      </div>
-      <div className="p-4 box mt-3 text-center">
+        <div className="p-3 box mt-3 text-center">
         Don't have an account? <Link to="/signup">Sign up</Link>
+      </div>
       </div>
     </div>
   );

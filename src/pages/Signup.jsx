@@ -35,17 +35,6 @@ const Signup = () => {
   
   const dbRef = collection(db, 'Users');
 
-  // const docRef = doc(db, 'Users', email)
-  // const data = {
-  //   email: {email},
-  //     password: {password},
-  //     fname: {fname},
-  //     lname: {lname},
-  //     phone: {phone},
-  //     dob: {dob},
-  // }
-
-
    const addUserdata = async (e) => {
     await setDoc(doc(db, 'Users', email), {
       email,
@@ -64,12 +53,15 @@ const Signup = () => {
           })
    }
 
+  
+
+
 
   return (
-    <>
-    <div style = {{ marginTop: '200px'}}><h2 className="Auth-form-title text-center">Sign Up</h2></div>
-    <div className="container w-40 pt-3 d-flex align-item justify-content-center">{error && <Alert variant="danger">{error}</Alert>} </div>
-      <div className="container w-40 d-flex align-item justify-content-center">
+      <div className='row-cols-lg-3 g-4 px-md-5' style={{marginTop: '200px'}}>
+      <div className='justify-content-center align-items container shadow p-3 mb-5 bg-white rounded' >
+      <h3 className='text-center'>Sign Up</h3>
+      <div className="container w-40 pt-3 d-flex align-item justify-content-center">{error && <Alert variant="danger">{error}</Alert>} </div>
         <Form onSubmit={handleSubmit}>
           
         <Form.Group className="mb-3" controlId="formBasicFname">
@@ -90,15 +82,17 @@ const Signup = () => {
 
         <Form.Group className="mb-3" controlId="formBasicPhone">
             <Form.Control
-              type="phone"
-              placeholder="Phone"
+               type="text"
+               pattern="\d{3}-\d{3}-\d{4}"
+               placeholder="Phone: xxx-xxx-xxxx"
               onChange={(e) => setPhone(e.target.value)}
             />
           </Form.Group>
           
           <Form.Group className="mb-3" controlId="formBasicDob">
             <Form.Control
-              type="DOB"
+              type="text"
+              pattern="\d{2}/\d{2}/\d{2}"
               placeholder="mm/dd/yr"
               onChange={(e) => setDob(e.target.value)}
             />
@@ -132,12 +126,12 @@ const Signup = () => {
               Sign up
             </Button>
           </div>
-        </Form>
-      </div>
-      <div className="p-4 box mt-3 text-center">
+          <div className="p-4 box mt-3 text-center">
         Already have an account? <Link to="/login">Log In</Link>
       </div>
-    </>
+        </Form>
+      </div>
+      </div>
   );
 };
 
