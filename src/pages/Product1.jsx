@@ -57,7 +57,7 @@ function Product1() {
                   </button>
                 </div>
                 <div className="col">
-                  <Link to="./cart">
+                  <Link to="/cart">
                     <button className="btn btn-dark py-2 w-100">Buy now</button>
                   </Link>
                 </div>
