@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import cart from '../images/cart.png';
-import { Button } from "react-bootstrap";
+import { Button, Navbar, NavItem, NavLink } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
 import pfp from '../images/pfp.png';
 import { Navigate } from 'react-router-dom';
 
 
-const Navbar = () => {
+const Nav = () => {
 
   const {user, logOut} = useUserAuth();
 
@@ -28,8 +28,9 @@ const Navbar = () => {
   if (!user) {
    return (
     <header>
-    <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
-      <div className="container-fluid">
+    {/* <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom"> */}
+    <Navbar style={{backgroundColor : "#F0778B"}}>
+        <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <span className="ms-2 h5">PirateBay</span>
         </Link>
@@ -44,19 +45,22 @@ const Navbar = () => {
           </ul>
           <Link to="/login" className="nav-link">
               <button className="btn btn-primary" variant="primary">
-              Login/SignUp
+              Login / SignUp
             </button>
               </Link>
 
         </div>
 
       </div>
-    </nav>
+      </Navbar>
   </header>
-  )}
+  )
+  }
+  
   return (
     <header>
-    <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
+      <Navbar color="light">
+    {/* <Nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom"> */}
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           <span className="ms-2 h5">PirateBay</span>
@@ -90,9 +94,10 @@ const Navbar = () => {
         </div>
 
       </div>
-    </nav>
+    {/* </nav> */}
+    </Navbar>
   </header>
   )
 }
 
-export default Navbar
+export default Nav
