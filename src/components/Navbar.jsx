@@ -82,14 +82,14 @@ const Navbar = () => {
             </ul>
             <Link to="/cart">
               <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
-                <img src={cart} alt="cart logo" style={{ width: '30px', height: '30px' }} />
+                <img src={cart} alt="cart logo" style={{ width: '20px', height: '20px' }} />
                 <span className="ms-2 badge rounded-pill bg-dark" style={{ color: 'white' }}>0</span>
               </button>
             </Link>
 
             <Link to="/account">
               <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
-                <img src={pfp} alt="user logo" style={{ width: '30px', height: '30px' }} />
+                <img src={pfp} alt="user logo" style={{ width: '20px', height: '20px' }} />
               </button>
             </Link>
 

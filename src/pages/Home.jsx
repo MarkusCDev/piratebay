@@ -1,15 +1,16 @@
 import React from 'react'
-import img from '../images/banner.jpg';
+import img from '../images/banners/treasure-chest.jpg';
 import { Link } from 'react-router-dom';
 import PopularProduct from './PopularProduct';
+import Banner from './Banner';
 
 const Home = () => {
   return (
     <>
-      <div>
-        <img src={img} alt="background" style={{ height: '400px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover' }}></img>
+      <div style={{ paddingTop: 18 }}>
         <div className="d-flex flex-column bg-white py-4">
-          <div className="d-flex justify-content-center">
+          <Banner />
+          <div style={{ padding: 50 }} className="d-flex justify-content-center">
             <Link to="/products" className="btn btn-primary" replace>
               Browse Products
             </Link>

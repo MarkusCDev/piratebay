@@ -19,6 +19,7 @@ import Secret from './pages/Secret';
 import CheckoutPage from './pages/Checkout';
 import Additem from './pages/Additem';
 import Banking from './pages/Banking';
+import Banner from './pages/Banner';
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
         <Route path="/products" element={<ProductList />} />
         <Route path="/products/1" element={<Product1 />} />
         <Route path="/checkout" element={<ProtectedRoute> <CheckoutPage /> </ProtectedRoute>} />
+        <Route path="/banner" element={<Banner />} />
       </Routes>
       <Footer />
     </UserAuthContextProvider>
