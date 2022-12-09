@@ -1,11 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Icon } from 'semantic-ui-react'
 import { Grid, Table } from 'react-bootstrap';
 
 const Cart = () => {
-  
-
 
   const [items, setItems] = useState([
     { name: 'item 1', quantity: 1 },
@@ -30,7 +28,7 @@ const Cart = () => {
   }
 
   return (
-    <div style = {{ marginTop: '200px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
+    <div style={{ marginTop: '200px ' }} className="shadow-lg p-3 mb-5 bg-white rounded container">
       <Button onClick={() => handleAddItem('new item')}>Add Item</Button>
       <Table>
         <thead>
