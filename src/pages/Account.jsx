@@ -5,57 +5,90 @@ import { Navigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Form, Alert } from "react-bootstrap";
 import { db } from '../firebase-config';
-import { snapshot, onSnapshot, getDoc, setDoc, doc, addDoc, collection } from "firebase/firestore";
-import { useEffect } from 'react';
+import { snapshot, onSnapshot, getDoc, getDocs, setDoc, doc, addDoc, collection } from "firebase/firestore";
+import { useEffect, useState } from 'react';
 
 
 const Account = () => {
 
-  const {user, logOut} = useUserAuth();
+  const {user} = useUserAuth();
+  
+  // -----------------------------
 
+  // --------------------------------
+  
 
   // get specific collection data
+
+const [userdata, setUserData] = useState(null);
+
 const retdata = async () => {
   const docRef = doc(db, "Users", user.email)
   const docSnap = await getDoc(docRef)
 
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data().email);
-  } else {
-    console.log("No such document!")
-  }
+  // if (docSnap.exists()) {
+  //   console.log("Document data:", docSnap.data().email);
+     setUserData(docSnap.data())
+  // } else {
+  //   console.log("No such document!")
+  // }
+
+  console.log(userdata)
 }
-  const handleLogout = async () => {
-    try{
-      await logOut()
-      console.log('you are logged out')
-    } catch(e){
-      console.log('suss not working')
-    }
-  }
+  useEffect(()=>{
+           retdata();
+       }, [user])
+
+
+
+  // can be used for SU to get all Users
+  //  const [userdata, setUserData] = useState([]);
+ 
+  //   const fetchPost = async () => {
+       
+  //     const ref = await doc(db, "Users", user.email)
+  //     docSnap = await getDoc(ref)
+
+  //       await getDoc(collection(db, "Users", user.email))
+  //           .then((querySnapshot)=>{               
+  //               const newData = querySnapshot.docs
+  //                   .map((doc) => ({...doc.data(), id:doc.id }));
+  //               setUserData(newData);                
+  //               console.log(userdata, newData);
+  //           })
+       
+  //   }
+   
+  //   useEffect(()=>{
+  //       fetchPost();
+  //   }, [])
+
+    // code for function above
+
+
   
+    
 
   return (
-    <div className='row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-md-5' style={{marginTop: '200px'}}>
+    <div className='row-cols-lg-3 g-4 px-md-5' style={{marginTop: '200px'}}>
       <div className='justify-content-center align-items container d-flex shadow p-3 mb-5 bg-white rounded' >
-      
-      <button onClick={retdata}></button>
+    
+      {/* <button className='btn btn-success' onClick={retdata}></button> */}
       <Form>
-     
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label><b>Email Address: </b>{user.email} </Form.Label>
+        <Form.Label><b>Email Addresss: </b>{user.email} </Form.Label>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicName">
-        <Form.Label><b>Name: </b>{user && user.fname} , {user &&user.lname}  
+        <Form.Label><b>Name: </b>{userdata?.fname} {userdata?.lname}  
     </Form.Label> </Form.Group>
 
     <Form.Group className="mb-3" controlId="formDOB">
-        <Form.Label><b >DOB: {user.dob} </b></Form.Label>
+        <Form.Label><b >DOB: </b>{userdata?.dob} </Form.Label>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formphonenumber">
-        <Form.Label><b > Phone Number: {user&& user.phone} </b></Form.Label>
+        <Form.Label><b > Phone Number: </b>{userdata?.phone} </Form.Label>
       </Form.Group>
       
 
@@ -93,7 +126,7 @@ const retdata = async () => {
       </Button>
       </div>
       <div className='mt-3'>
-      <Link to="/depositwithdraw"><Button variant="dark" type="deposit/withdraw">
+      <Link to="/account/banking"><Button variant="dark" type="deposit/withdraw">
         Deposit/Withdraw
       </Button>
       </Link>

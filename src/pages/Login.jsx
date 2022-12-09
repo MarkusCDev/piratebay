@@ -25,10 +25,12 @@ const Login = () => {
 
 
   return (
-    <>
-      <div style = {{ marginTop: '200px'}}><h2 className="Auth-form-title text-center">Log In</h2></div>
-      <div className="container w-40 pt-3 d-flex align-item justify-content-center">{error && <Alert variant="danger">{error}</Alert>} </div>
-      <div className="container w-40 d-flex align-item justify-content-center">
+    <div style = {{ marginTop: '200px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
+      <div><h2 className="Auth-form-title text-center ">Log In</h2></div>
+      <div className="container w-40 pt-2 d-flex align-item justify-content-center">{error && <Alert variant="danger">{error}</Alert>} </div>
+      <div className="d-flex align-item justify-content-center">
+
+        
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
@@ -57,7 +59,7 @@ const Login = () => {
       <div className="p-4 box mt-3 text-center">
         Don't have an account? <Link to="/signup">Sign up</Link>
       </div>
-    </>
+    </div>
   );
 };
 

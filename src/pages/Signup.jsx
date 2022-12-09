@@ -10,6 +10,7 @@ const Signup = () => {
 
   const {user} = useUserAuth();
 
+  const [money, setMoney] = useState(0);
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [phone, setPhone] = useState("");
@@ -52,7 +53,8 @@ const Signup = () => {
       fname,
       lname,
       phone,
-      dob
+      dob,
+      money
     })
     // await setDoc(docRef, data)
     .then(docRef => {
