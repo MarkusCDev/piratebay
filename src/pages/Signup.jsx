@@ -78,11 +78,7 @@ const Signup = () => {
     <>
 {/* <<<<<<< Updated upstream */}
     <div style = {{ marginTop: '50px'}}><h2 className="Auth-form-title text-center">Sign Up</h2></div>
-=======
 
-  
-
-    <div style = {{ marginTop: '200px'}}><h2 className="Auth-form-title text-center">Sign Up</h2></div>
 {/* >>>>>>> Stashed changes */}
     <div className="container w-40 pt-3 d-flex align-item justify-content-center">{error && <Alert variant="danger">{error}</Alert>} </div>
       <div className="container w-40 d-flex align-item justify-content-center">

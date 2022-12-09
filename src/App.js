@@ -24,7 +24,7 @@ const App = () => {
   return (
     <UserAuthContextProvider>
       <Nav/>
-      <div style={{backgroundColor:"red"}}>
+      <div style={{backgroundColor:"#F5E4E1"}}>
    
       <Routes>
         <Route path="/" element={<Home />} />
