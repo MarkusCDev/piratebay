@@ -55,39 +55,40 @@ const Banking = () => {
   }, [user])
 
   return (
-    <div style={{ marginTop: '100px', width:'700px' }} className="shadow-lg p-3 mb-5 bg-white rounded container">  
-      <div></div>
-      <div><h2 className="text-center">Banking</h2></div> 
-      <div style={{ marginTop: '30px ' }}>
-        <h3 className="text-center">Balance: ${userdata?.money}</h3>
+    <div style={{ backgroundColor :'gray', paddingBottom: "113px", paddingTop: "140px"}}>
+      <div style={{width:'700px'}} className="shadow-lg p-3 mb-5 bg-white rounded container">  
+        <div></div>
+        <div><h2 className="text-center" style={{borderBottom: "1px solid black"}}>Banking</h2></div> 
+        <div style={{ marginTop: '30px' }}>
+          <h3 className="text-center">Balance: ${userdata?.money}</h3>
+        </div>
+        <div>
+          <h3 className="text-center">Current Card: Visa 4893</h3>
+        </div>
+        <div className="mr-3" style={{ 'text-align': 'left', marginLeft: "25%", marginTop: '30px',  height: '50px'}}>      
+          <b style={{ marginRight: "32px"}}>Deposit</b>
+          $<input value={inputDepositRef}
+            type="number"
+            placeholder="Input deposit"
+            onChange={(e) => setDepositRef(e.target.value)}
+            style={{}} />
+          <Button style={{'text-align': 'center', marginLeft: '25px', width: '30px', height: '25px', paddingTop: "2px" }} className="btn btn-success" onClick={handleClick1}><b>+</b></Button>
+        </div>
+        <div className="mr-3" style={{'text-align': 'left', marginLeft: "25%"}}>      
+          <b style={ {marginRight: "18px"} }>Withdraw</b>
+          $<input value={inputWithdrawRef}
+            type="number"
+            placeholder="Input withdraw"
+            onChange={(e) => setWithdrawRef(e.target.value)}
+            style={{}} />
+          <Button style={{ 'text-align': 'center', marginLeft: '25px', width: '30px', height: '25px', paddingTop: "2px" }} className="btn btn-danger" onClick={handleClick2}><b>-</b></Button>
+        </div>
       </div>
-      <div>
-        <h3 className="text-center">Current Card: Visa 4893</h3>
-      </div>
-      <div className="mr-3" style={{ 'text-align': 'center', marginTop: '50px',  height: '50px'}}>      
-        <b style={{ marginRight: '30px ' }}>Deposit</b>
-        <input value={inputDepositRef}
-          type="number"
-          placeholder="Input deposit"
-          onChange={(e) => setDepositRef(e.target.value)} />
-        <Button style={{'text-align': 'center', marginLeft: '50px', width: '70px', height: '25px' }} className="btn btn-success" onClick={handleClick1}><b>+</b></Button>
-      </div>
-      <div className="mr-3" style={{'text-align': 'center'}}>      
-        <b style={{ marginRight: '30px ' }}>Withdraw</b>
-        <input value={inputWithdrawRef}
-          type="number"
-          placeholder="Input withdraw"
-          onChange={(e) => setWithdrawRef(e.target.value)} />
-        <Button style={{ 'text-align': 'center', marginLeft: '50px', width: '70px', height: '25px' }} className="btn btn-danger" onClick={handleClick2}><b>-</b></Button>
-      </div>
-    </div>
-    
-
-    
+  </div>
 
   )
 }
-export default Banking
+export default Banking 
 
 
 // export default depositwithdraw
@@ -99,3 +100,34 @@ export default Banking
 //   )
 // }
 // export default depositwithdraw
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
