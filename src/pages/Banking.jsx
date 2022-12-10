@@ -55,37 +55,35 @@ const Banking = () => {
   }, [user])
 
   return (
-    <div style={{ marginTop: '200px ' }} className="shadow-lg p-3 mb-5 bg-white rounded container">
-      <div><h2 className="text-center">Banking</h2></div>
-
-
-      <div className="mt-3">
-        <h3>Balance: ${userdata?.money}</h3>
+    <div style={{ marginTop: '100px', width:'700px' }} className="shadow-lg p-3 mb-5 bg-white rounded container">  
+      <div></div>
+      <div><h2 className="text-center">Banking</h2></div> 
+      <div style={{ marginTop: '30px ' }}>
+        <h3 className="text-center">Balance: ${userdata?.money}</h3>
       </div>
-
-      <div className="mt-3">
-        <h3>Current Card: Visa 4893</h3>
+      <div>
+        <h3 className="text-center">Current Card: Visa 4893</h3>
       </div>
-
-      <div className="mt-3">
-        <h3>Deposit</h3>
+      <div className="mr-3" style={{ 'text-align': 'center', marginTop: '50px',  height: '50px'}}>      
+        <b style={{ marginRight: '30px ' }}>Deposit</b>
         <input value={inputDepositRef}
           type="number"
           placeholder="Input deposit"
           onChange={(e) => setDepositRef(e.target.value)} />
-        <Button style={{ marginLeft: '10px', width: '50px', height: '25px' }} className="btn btn-success" onClick={handleClick1}></Button>
+        <Button style={{'text-align': 'center', marginLeft: '50px', width: '70px', height: '25px' }} className="btn btn-success" onClick={handleClick1}><b>+</b></Button>
       </div>
-
-
-      <div className="mt-3">
-        <h3>Withdraw</h3>
+      <div className="mr-3" style={{'text-align': 'center'}}>      
+        <b style={{ marginRight: '30px ' }}>Withdraw</b>
         <input value={inputWithdrawRef}
           type="number"
           placeholder="Input withdraw"
           onChange={(e) => setWithdrawRef(e.target.value)} />
-        <Button style={{ marginLeft: '10px', width: '50px', height: '25px' }} className="btn btn-danger" onClick={handleClick2}></Button>
+        <Button style={{ 'text-align': 'center', marginLeft: '50px', width: '70px', height: '25px' }} className="btn btn-danger" onClick={handleClick2}><b>-</b></Button>
       </div>
     </div>
+    
+
+    
 
   )
 }

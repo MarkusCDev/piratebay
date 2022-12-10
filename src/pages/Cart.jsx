@@ -4,12 +4,14 @@ import { Button, Icon } from 'semantic-ui-react'
 import { Grid, Table } from 'react-bootstrap';
 import img1 from '../images/jar.jpg';
 import img2 from '../images/psword.jpg';
+import img3 from '../images/frame.jpg';
 
 const Cart = () => {
 
   const [items, setItems] = useState([
     { name: 'Item 1', quantity: 1, product: img1, price: '$200' },
     { name: 'Item 2', quantity: 1, product: img2, price: '$500' },
+    { name: 'Item 3', quantity: 1, product: img3, price: '$300' }
   ]);
 
   // Event handler for adding items to the cart
@@ -66,7 +68,7 @@ const Cart = () => {
       </Table>
 
       <div>
-      <td> <b>Subtotal</b> : $700 </td>    
+      <td> <b>Subtotal</b> : $1000 </td>    
         <Link to="/checkout">
           <Button>Checkout</Button>
         </Link>               
