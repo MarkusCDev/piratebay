@@ -7,7 +7,7 @@ import { storage } from "../firebase-config";
 import { collection, snapshot, onSnapshot, addDoc, getDoc, setDoc, doc, query, where, getCountFromServer } from "firebase/firestore"
 import { db } from "../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-
+import { serverTimestamp } from "firebase/firestore";
 
 const Additem = () => {
 
@@ -21,6 +21,8 @@ const Additem = () => {
   const [timelimit, setTimelimit] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState(null);
+  const [imagelink, setImageLink] = useState('');
+  const [startbid, setStartBid] = useState(0);
 
   const [imageError, setImageError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -70,7 +72,10 @@ const Additem = () => {
             keywords,
             timelimit,
             image: url,
-            currentbid: 0
+            imagelink,
+            timestamp: serverTimestamp(),
+            currentbid: 0,
+            startbid
           }).then(docRef => {
             console.log("Document Id:", docRef.id)
           }).catch(error => {
@@ -78,6 +83,7 @@ const Additem = () => {
           })
         })
       })
+
   }
 
   //  DO NOT DELETE THIS! WILL NEED THIS IN THE FUTURE.
@@ -169,11 +175,23 @@ const Additem = () => {
             />
           </Form.Group>
 
+          <Form.Group className="mb-3" controlId="formBasicKeyword">
+            <Form.Label>Starting Bid</Form.Label>
+            <Form.Control
+              type="keyword"
+              placeholder="Starting Bid"
+              required
+              onChange={(e) => setStartBid(e.target.value)}
+              value={keywords}
+            />
+          </Form.Group>
+
+
           <Form.Group className="mb-3" controlId="formBasicPricerange">
-            <Form.Label>Price Range</Form.Label>
+            <Form.Label>Buy Now Price</Form.Label>
             <Form.Control
               type="pricerange"
-              placeholder="Price Range"
+              placeholder="Buy Now Price"
               required
               onChange={(e) => setPrice(e.target.value)}
               value={price}
@@ -194,14 +212,26 @@ const Additem = () => {
             <div>{imageError}</div>
           </>}
 
-          <Form.Group className="mb-3" controlId="formBasicExtraphotos">
+          {/* <Form.Group className="mb-3" controlId="formBasicExtraphotos">
             <Form.Label>Extra photos</Form.Label>
             <Form.Control
               type="file"
               placeholder="Extra Photos"
             />
           </Form.Group>
-          <Button className="btn btn-success mb-4" type="submit">ADD</Button>
+          <Button className="btn btn-success mb-4" type="submit">ADD</Button> */}
+
+          <Form.Group className="mb-3" controlId="formBasicPricerange">
+            <Form.Label>Image URL</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Image URL"
+              required
+              onChange={(e) => setImageLink(e.target.value)}
+              value={imagelink}
+            />
+          </Form.Group>
+
 
           <div className="d-grid gap-2 mb-2">
             <Button variant="btn btn-primary" type="Submit">

@@ -41,7 +41,9 @@ const Signup = () => {
       lname,
       phone,
       dob,
-      money
+      money: 0,
+      rating: 5,
+      warning: 0
     })
       // await setDoc(docRef, data)
       .then(docRef => {

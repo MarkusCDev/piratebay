@@ -87,15 +87,16 @@ const Navbar = () => {
               </button>
             </Link>
 
-            <Link to="/account">
-              <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
-                <img src={pfp} alt="user logo" style={{ width: '20px', height: '20px' }} />
-              </button>
-            </Link>
-
             <Link className="text-decoration-none " to="/account/banking">
               <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
                 ${userdata?.money}
+              </button>
+            </Link>
+
+            <Link to="/account">
+              <button type="button" className="btn btn-outline-dark me-3 d-none d-lg-inline">
+                {/* <img src={pfp} alt="user logo" style={{ width: '20px', height: '20px' }} /> */}
+                {userdata?.fname} {userdata?.lname}
               </button>
             </Link>
 

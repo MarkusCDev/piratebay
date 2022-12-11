@@ -173,7 +173,7 @@ const CheckoutPage = () => {
                             </FormGroup>
                             <FormField control={Checkbox} label='I agree to the Terms and Conditions' />
                             <FormField>
-                                <label style={{ color: 'red', fontSize: '25px' }}> * Required Field </label>
+                                <label style={{ color: 'red', fontSize: '15x' }}> * Required Field </label>
                             </FormField>
                             <FormGroup>
                                 <Link to='/cart'>

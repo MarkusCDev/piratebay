@@ -3,6 +3,8 @@ import Slider from "react-slick";
 import piratebay from '../images/banners/pirate-bay.png';
 import treasureChest from '../images/banners/treasure-chest.jpg';
 import legendOfTheSea from '../images/banners/legend-of-the-seas.jpg';
+import sot1 from '../images/banners/sot1.jpg'
+import sot2 from '../images/banners/sot2.jpg'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -10,10 +12,10 @@ export default class Banner extends Component {
     render() {
         const settings = {
             autoplay: true,
-            autoplaySpeed: 1500,
+            autoplaySpeed: 3000,
             dots: true,
             infinite: true,
-            speed: 500,
+            speed: 1000,
             slidesToShow: 1,
             slidesToScroll: 1
         };
@@ -24,7 +26,7 @@ export default class Banner extends Component {
                         <img src={piratebay} alt="background" style={{ height: '500px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover' }}></img>
                     </div>
                     <div>
-                        <img src={treasureChest} alt="background" style={{ height: '500px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover' }}></img>
+                        <img src={sot2} alt="background" style={{ height: '500px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover' }}></img>
                     </div>
                     <div>
                         <img src={legendOfTheSea} alt="background" style={{ height: '500px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover' }}></img>
