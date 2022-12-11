@@ -104,7 +104,6 @@ function Product1() {
                 </div>
               </div>
 
-
               {/* Description of product details */}
 
               <h4 className="mb-0">Details</h4>

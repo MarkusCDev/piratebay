@@ -7,7 +7,7 @@ import { storage } from "../firebase-config";
 import { collection, snapshot, onSnapshot, addDoc, getDoc, setDoc, doc, query, where, getCountFromServer } from "firebase/firestore"
 import { db } from "../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { serverTimestamp } from "firebase/firestore";
+import { serverTimestamp, updateDoc } from "firebase/firestore";
 
 const Additem = () => {
 
@@ -75,9 +75,19 @@ const Additem = () => {
             imagelink,
             timestamp: serverTimestamp(),
             currentbid: 0,
-            startbid
-          }).then(docRef => {
+            startbid,
+            uid: ""
+          }).then(async docRef => {
             console.log("Document Id:", docRef.id)
+
+            console.log(typeof(docRef.id))
+            const dref = doc(db, "Products", docRef.id)
+            await updateDoc(dref, {
+            uid: docRef.id
+             });
+
+
+
           }).catch(error => {
             console.log("Error adding document:", error)
           })
@@ -178,11 +188,11 @@ const Additem = () => {
           <Form.Group className="mb-3" controlId="formBasicKeyword">
             <Form.Label>Starting Bid</Form.Label>
             <Form.Control
-              type="keyword"
+              type="Starting Bid"
               placeholder="Starting Bid"
               required
               onChange={(e) => setStartBid(e.target.value)}
-              value={keywords}
+              value={startbid}
             />
           </Form.Group>
 
