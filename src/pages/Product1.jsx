@@ -1,8 +1,48 @@
+import React, { useEffect, useState } from "react";
 import Image from "../images/psword.jpg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import Button from "@restart/ui/esm/Button";
+import { useUserAuth } from "../context/UserAuthContext";
+import { db } from "../firebase-config";
+import { getDoc, doc } from "firebase/firestore";
+
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 
 function Product1() {
+  
+  const { user } = useUserAuth();
+  const { uid } = useParams()
+  const [userdata, setUserData] = useState(null);
+
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const retdata = async () => {
+    const x = uid
+    const y = "GwWMZqqEESpwLTS5ad44"
+
+    if (x == y) {
+      console.log("same")
+    }else {
+      console.log("not same")
+    }
+
+
+    const docRef = doc(db, "Products", x)
+    const docSnap = await getDoc(docRef)
+    console.log(x)
+    console.log(y)
+    setUserData(docSnap.data())
+  }
+  useEffect(() => {
+    retdata();
+  }, [user])
+
+
   return (
     <>
       <div style={{ marginTop: '200px ' }} className="shadow-lg p-3 mb-2 bg-white rounded container">
@@ -15,7 +55,8 @@ function Product1() {
                 <img
                   className="border rounded ratio ratio-1x1"
                   alt=""
-                  src={Image}
+                  height = "500px"
+                  src={userdata?.imagelink}
                 />
               </div>
             </div>
@@ -35,7 +76,7 @@ function Product1() {
                           width="70"
                           height="70"
                           alt=""
-                          src={Image}
+                          src={userdata?.imagelink}
                         />
                       </a>
                     );
@@ -47,69 +88,93 @@ function Product1() {
 
           <div className="col-lg-5">
             <div className="d-flex flex-column h-100">
-              <h2 className="mb-1">Pirate Sword</h2>
-              <h4 className="text-muted mb-4">$1,000 USD</h4>
+              <h2 className="mb-1">{userdata?.title}</h2>
+              <h4 className="text-muted">Time Remaining: </h4>
 
               <div className="row g-3 mb-4">
                 <div className="col">
                   <button className="btn btn-outline-dark py-2 w-100">
-                    Bid: $150
+                    Bid: ${userdata?.currentbid} USD
                   </button>
                 </div>
                 <div className="col">
                   <Link to="./cart">
-                    <button className="btn btn-dark py-2 w-100">Buy now</button>
+                    <button className="btn btn-dark py-2 w-100">Buy now: ${userdata?.price} USD</button>
                   </Link>
                 </div>
               </div>
+
 
               {/* Description of product details */}
 
               <h4 className="mb-0">Details</h4>
               <hr />
               <dl className="row">
-                <dt className="col-sm-4">Code</dt>
-                <dd className="col-sm-8 mb-3">0001</dd>
+                <dt className="col-sm-4">Product #:</dt>
+                <dd className="col-sm-8 mb-3">{uid}</dd>
+
+                <dt className="col-sm-4">Starting Bid:</dt>
+                <dd className="col-sm-8 mb-3">${userdata?.startbid} USD</dd>
 
                 <dt className="col-sm-4">Category</dt>
-                <dd className="col-sm-8 mb-3">Weapon</dd>
-
-                <dt className="col-sm-4">Brand</dt>
-                <dd className="col-sm-8 mb-3">Spanish</dd>
-
-                <dt className="col-sm-4">Manufacturer</dt>
-                <dd className="col-sm-8 mb-3">Spain</dd>
-
-                <dt className="col-sm-4">Color</dt>
-                <dd className="col-sm-8 mb-3">Rose Gold</dd>
-
-                <dt className="col-sm-4">Status</dt>
-                <dd className="col-sm-8 mb-3">New</dd>
+                <dd className="col-sm-8 mb-3">{userdata?.keywords}</dd>
 
                 <dt className="col-sm-4">Rating</dt>
                 <dd className="col-sm-8 mb-3">4.9/5.0</dd>
+
+                <dt className="col-sm-4">Seller</dt>
+                <dd className="col-sm-8 mb-3">{userdata?.seller}</dd>
               </dl>
 
-              <h4 className="mb-0">Description</h4>
-              <hr />
-              <p className="lead flex-shrink-0">
-                <small>You can't be a pirate without a sword!</small>
-              </p>
+            <h4 className="mb-0">Description</h4>
+            <hr />
+            <p className="lead flex-shrink-0">
+              <small>{userdata?.description}</small>
+            </p>
+            <div>
+            <button className="btn btn-dark py-2 w-40" onClick={handleShow}>
+                Report Item
+            </button>
+            <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Reason :</Form.Label>
+              <Form.Control
+                type="email"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label>Report :</Form.Label>
+              <Form.Control as="textarea" rows={3} />
+            </Form.Group>
+            <button style={{float: 'right'}} className="btn btn-dark">Submit</button>
+          </Form>
+        </Modal.Body>
+      </Modal>
             </div>
+
           </div>
         </div>
       </div>
-      <div style={{ marginTop: '50px ' }}>
-        <div style={{ marginTop: '25px ' }} className="shadow-lg p-3 mb-5 bg-white rounded container">
-          Review 1
-        </div>
-        <div style={{ marginTop: '25px ' }} className="shadow-lg p-3 mb-5 bg-white rounded container">
-          Review 2
-        </div>
-        <div style={{ marginTop: '25px ' }} className="shadow-lg p-3 mb-5 bg-white rounded container">
-          Review 3
-        </div>
-      </div>
+    </div>
+    <div style = {{ marginTop: '50px '}}>
+    <div style = {{ marginTop: '25px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
+                  Review 1
+    </div>
+    <div style = {{ marginTop: '25px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
+                  Review 2
+    </div>
+    <div style = {{ marginTop: '25px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
+                  Review 3
+    </div>
+    </div>
     </>
   );
 }

@@ -55,16 +55,13 @@ const Banking = () => {
   }, [user])
 
   return (
-    <div style={{ marginTop: '200px ' }} className="shadow-lg p-3 mb-5 bg-white rounded container">
-      <div><h2 className="text-center">Banking</h2></div>
+    <div className='row-cols-lg-3 g-4 px-md-5' style={{marginTop: '200px'}}>
+      <div className='justify-content-center align-items container shadow p-3 mb-5 bg-white rounded' >
+      <h3 className='text-center'>Banking</h3>
 
 
-      <div className="mt-3">
-        <h3>Balance: ${userdata?.money}</h3>
-      </div>
-
-      <div className="mt-3">
-        <h3>Current Card: Visa 4893</h3>
+      <div className="mt-3 text-center">
+        <h3 style={{color: 'green'}}>${userdata?.money}</h3>
       </div>
 
       <div className="mt-3">
@@ -85,6 +82,7 @@ const Banking = () => {
           onChange={(e) => setWithdrawRef(e.target.value)} />
         <Button style={{ marginLeft: '10px', width: '50px', height: '25px' }} className="btn btn-danger" onClick={handleClick2}></Button>
       </div>
+    </div>
     </div>
 
   )
