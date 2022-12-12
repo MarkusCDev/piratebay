@@ -14,6 +14,18 @@ function Product1() {
   const [userdata, setUserData] = useState(null);
   const [userr] = useState(null);
 
+  const [timeLeft, setTimeLeft] = useState(Math.floor(Math.random() * 604800));
+
+  const tick = async () => {
+    if (timeLeft > 0) {
+      setTimeLeft(timeLeft - 1);
+    }
+  }
+  const days = Math.floor(timeLeft / 86400);
+  const hours = Math.floor(timeLeft % 86400 / 3600);
+  const minutes = Math.floor(timeLeft % 3600 / 60);
+  const seconds = timeLeft % 60;
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -33,6 +45,7 @@ function Product1() {
     console.log(y)
     setUserData(docSnap.data())
   }
+
   // const Userr = async () => {
   //   const o = {userdata?.seller}
   //   const docRef2 = doc(db, "Users", o)
@@ -41,8 +54,10 @@ function Product1() {
   // }
   useEffect(() => {
     retdata();
+    const timer = setInterval(tick, 1000); // Run the tick function every second
+    return () => clearInterval(timer);
     //Userr();
-  }, [user])
+  }, [user, timeLeft])
 
 
   return (
@@ -91,8 +106,7 @@ function Product1() {
           <div className="col-lg-5">
             <div className="d-flex flex-column h-100">
               <h2 className="mb-1">{userdata?.title}</h2>
-              <h4 className="text-muted">Time Remaining: </h4>
-
+              <h4 className="text-muted">Time Remaining: {days} days {hours} hours {minutes} minutes {seconds} seconds </h4>
               <div className="row g-3 mb-4">
                 <div className="col">
                   <button className="btn btn-outline-dark py-2 w-100">
