@@ -41,6 +41,21 @@ const Additem = () => {
     }
   }
 
+  const handleTimeLimit = (event) => {
+    setTimelimit(event.target.value);
+  }
+
+  const handleTimeLimitBlur = () => {
+    if (timelimit === '') {
+      // The input is empty, so don't show the alert
+      return;
+    }
+
+    if (timelimit < 1) {
+      alert('Please put at least 1 day for the auction timelimit.');
+    }
+  }
+
   const { user } = useUserAuth();
   const data = {
     seller: user.email,
@@ -163,10 +178,11 @@ const Additem = () => {
           <Form.Group className="mb-3" controlId="formBasicTimelimit">
             <Form.Label>Time limit</Form.Label>
             <Form.Control
-              type="timelimit"
-              placeholder="Auction Timelimit"
+              type="number"
+              placeholder="Auction Timelimit in day/days"
               required
-              onChange={(e) => setTimelimit(e.target.value)}
+              onChange={handleTimeLimit}
+              onBlur={handleTimeLimitBlur}
               value={timelimit}
             />
           </Form.Group>
