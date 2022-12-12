@@ -60,6 +60,7 @@ const stateOptions = [
     { key: 'DC', text: 'District of Columbia', value: 'District of Columbia' },
 ]
 
+
 const CheckoutPage = () => {
 
     const { user } = useUserAuth();
@@ -179,7 +180,9 @@ const CheckoutPage = () => {
                                 <Link to='/cart'>
                                     <Button onClick={Push} content='Back to Cart' />
                                 </Link>
+                                <Link to="/rating">
                                 <Button onClick={Push}>Submit</Button>
+                                </Link>
                             </FormGroup>
                             <FormGroup>
                                 <Button circular icon='google pay' color='twitter' size='huge' />
@@ -190,6 +193,7 @@ const CheckoutPage = () => {
                     </div>
                 </div>
             </div>
+            
         </div >
     )
 }

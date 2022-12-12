@@ -30,6 +30,7 @@ import Pricedesc from './pages/category/Pricedesc';
 import Priceasc from './pages/category/Priceasc';
 import Lowrating from './pages/category/Lowrating';
 import Toprating from './pages/category/Toprating';
+import RatingPopup from './pages/RatingPopup';
 
 const App = () => {
   return (
@@ -58,6 +59,7 @@ const App = () => {
         <Route path="/category/Lowrating" element={<Lowrating />} />
         <Route path="/checkout" element={<ProtectedRoute> <CheckoutPage /> </ProtectedRoute>} />
         <Route path="/banner" element={<Banner />} />
+        <Route path="/rating" element={<RatingPopup />} />
       </Routes>
       <Footer />
     </UserAuthContextProvider>
