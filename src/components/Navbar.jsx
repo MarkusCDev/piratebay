@@ -1,20 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import cart from '../images/cart.png';
-import { Button } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
-import pfp from '../images/pfp.png';
-import { Navigate } from 'react-router-dom';
-import { snapshot, onSnapshot, getDoc, getDocs, setDoc, doc, addDoc, collection } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import { db } from '../firebase-config';
 import { useEffect, useState } from 'react';
 
 const Navbar = () => {
-
   const { user, logOut } = useUserAuth();
-
   const [userdata, setUserData] = useState(null);
-
   const retdata = async () => {
     const docRef = doc(db, "Users", user.email)
     const docSnap = await getDoc(docRef)
@@ -71,7 +65,6 @@ const Navbar = () => {
           <Link className="navbar-brand" to="/">
             <span className="ms-2 h5">PirateBay</span>
           </Link>
-
           <div className={"navbar-collapse offcanvas-collapse "}>
             <ul className="navbar-nav me-auto mb-lg-0">
               <li className="nav-item">
@@ -99,8 +92,6 @@ const Navbar = () => {
                 {userdata?.fname} {userdata?.lname}
               </button>
             </Link>
-
-
             <button onClick={handleLogout} className="btn btn-primary" variant="primary">
               Log Out
             </button>

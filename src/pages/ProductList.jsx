@@ -2,14 +2,10 @@ import PopularProduct from "./PopularProduct";
 import { useState, useEffect } from "react";
 import searchimg from "../images/search.png"
 import { db } from "../firebase-config";
-import { getDocs } from "@firebase/firestore";
-import { query, collectionGroup, orderBy, onSnapshot, collection } from "firebase/firestore";
+import { onSnapshot, collection } from "firebase/firestore";
 import { useUserAuth } from "../context/UserAuthContext";
-import imgset from "../images/setting.png"
 import { Dropdown } from "react-bootstrap";
 import { DropdownItem } from "semantic-ui-react";
-
-
 
 function ProductList() {
   const [viewType] = useState({ grid: true });
@@ -78,11 +74,11 @@ function ProductList() {
       console.log("Document Id:", docRef.id)
     })
   }
-  
+
   useEffect(() => {
     retdata3();
   }, [user])
-  
+
 
   return (
     <div className="container mt-5 py-4 px-xl-5 justify-content-center">
@@ -90,39 +86,39 @@ function ProductList() {
         <div className="d-flex flex-column h-100">
           <div className="row mb-3">
             <div className="col-lg-9 col-xl-5 offset-xl-4 d-flex flex-row">
-            <div className="input-group">
-              <Dropdown>
-                <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                  Filter
-                </Dropdown.Toggle>
+              <div className="input-group">
+                <Dropdown>
+                  <Dropdown.Toggle variant="dark" id="dropdown-basic">
+                    Filter
+                  </Dropdown.Toggle>
 
-                <Dropdown.Menu className="justify-content-center">
-                  <DropdownItem>-------Categories-------</DropdownItem>
-                  <Dropdown.Item href="/products">All</Dropdown.Item>
-                  <Dropdown.Item href="/category/Boats">Boats</Dropdown.Item>
-                  <Dropdown.Item href="/category/Cannons">Cannons</Dropdown.Item>
-                  <Dropdown.Item href="/category/Food">Food</Dropdown.Item>
-                  <Dropdown.Item href="/category/Maps">Maps</Dropdown.Item>
-                  <Dropdown.Item href="/category/Ships">Ships</Dropdown.Item>
-                  <Dropdown.Item href="/category/Weapons">Weapons</Dropdown.Item>
-                  <DropdownItem>---------Sorting---------</DropdownItem>
-                  <Dropdown.Item href="/category/Weapons">Top Ratings</Dropdown.Item>
-                  <Dropdown.Item href="/category/Weapons">Low Ratings</Dropdown.Item>
-                  <Dropdown.Item href="/category/Weapons">Price Desc</Dropdown.Item>
-                  <Dropdown.Item href="/category/Weapons">Price Asc</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Search products..."
-                aria-label="search input"
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <button className="btn btn-outline-dark">
-                <img src={searchimg} alt="search icon" style={{ width: '15px', height: '15px' }} />
-              </button>
-            </div>
+                  <Dropdown.Menu className="justify-content-center">
+                    <DropdownItem>-------Categories-------</DropdownItem>
+                    <Dropdown.Item href="/products">All</Dropdown.Item>
+                    <Dropdown.Item href="/category/Boats">Boats</Dropdown.Item>
+                    <Dropdown.Item href="/category/Cannons">Cannons</Dropdown.Item>
+                    <Dropdown.Item href="/category/Food">Food</Dropdown.Item>
+                    <Dropdown.Item href="/category/Maps">Maps</Dropdown.Item>
+                    <Dropdown.Item href="/category/Ships">Ships</Dropdown.Item>
+                    <Dropdown.Item href="/category/Weapons">Weapons</Dropdown.Item>
+                    <DropdownItem>---------Sorting---------</DropdownItem>
+                    <Dropdown.Item href="/category/Weapons">Top Ratings</Dropdown.Item>
+                    <Dropdown.Item href="/category/Weapons">Low Ratings</Dropdown.Item>
+                    <Dropdown.Item href="/category/Weapons">Price Desc</Dropdown.Item>
+                    <Dropdown.Item href="/category/Weapons">Price Asc</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="Search products..."
+                  aria-label="search input"
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <button className="btn btn-outline-dark">
+                  <img src={searchimg} alt="search icon" style={{ width: '15px', height: '15px' }} />
+                </button>
+              </div>
             </div>
           </div>
           <div
@@ -132,8 +128,8 @@ function ProductList() {
             {
               productarray.filter((product) => {
                 return search.toLowerCase() === '' ? product : product.title.toLowerCase().includes(search)
-              }).map((product)  => (
-                <PopularProduct key={product.uid} pro_img={product.imagelink} pro_title={product.title} pro_price={product.price} pro_uid={product.uid}/>
+              }).map((product) => (
+                <PopularProduct key={product.uid} pro_img={product.imagelink} pro_title={product.title} pro_price={product.price} pro_uid={product.uid} />
               ))
             }
           </div>
