@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Icon } from 'semantic-ui-react'
 import { Grid, Table } from 'react-bootstrap';
+import imgt from "../images/psword.jpg"
+
 
 const Cart = () => {
 
   const [items, setItems] = useState([
-    { name: 'item 1', quantity: 1 },
-    { name: 'item 2', quantity: 2 },
+    { name: 'Item 1', quantity: 1, product: imgt, price: '$200' },
+    { name: 'Item 2', quantity: 1, product: imgt, price: '$500' },
+    { name: 'Item 3', quantity: 1, product: imgt, price: '$300' }
   ]);
 
   // Event handler for adding items to the cart
@@ -35,6 +38,8 @@ const Cart = () => {
           <tr>
             <th>Item Name</th>
             <th>Quantity</th>
+            <th>Product</th>
+            <th>Price</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -42,13 +47,17 @@ const Cart = () => {
           {items.map((item, index) => (
             <tr key={item.name}>
               <td>{item.name}</td>
+              
               <td>
                 <input
-                  type="number"
+                  type="number" 
                   value={item.quantity}
                   onChange={(e) => handleUpdateQuantity(index, e.target.value)}
                 />
               </td>
+                        
+                <td><img src={item.product} height="100" width="100"></img></td>
+              <td>{item.price}</td>
               <td>
                 <Button onClick={() => handleRemoveItem(item)}>Remove</Button>
               </td>
@@ -58,12 +67,15 @@ const Cart = () => {
       </Table>
 
       <div>
-        <Link to="/checkout">
-          <Button>Checkout</Button>
-        </Link>
+      <td> <b>Subtotal</b> : $1000 </td>    
+        <div className='mt-3'>
+        <Link to="/checkout" >
+          <button className='btn btn-dark'>Checkout</button>
+        </Link>  
+        </div>
       </div>
-
     </div>
+    
   );
 }
 

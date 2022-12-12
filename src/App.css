@@ -18,3 +18,14 @@ input[type=number] {
 .pt-50 {
   margin-top: 50px;
 }
+
+figcaption {
+  position: fixed;
+  text-align: center;
+  bottom: 1em;
+  color: #ffd900d6;
+  font-size: 6em;
+  font-family: "Times New Roman";
+  padding: 1em;
+  margin: 0px auto;
+}

@@ -1,43 +1,18 @@
-import PopularProduct from "./PopularProduct";
+import PopularProduct from "../PopularProduct";
 import { useState, useEffect } from "react";
-import searchimg from "../images/search.png"
-import { db } from "../firebase-config";
+import searchimg from "../../images/search.png"
+import { db } from "../../firebase-config";
 import { getDocs } from "@firebase/firestore";
-import { query, collectionGroup, orderBy, onSnapshot, collection } from "firebase/firestore";
-import { useUserAuth } from "../context/UserAuthContext";
-import imgset from "../images/setting.png"
+import { where, query, collectionGroup, orderBy, onSnapshot, collection } from "firebase/firestore";
+import { useUserAuth } from "../../context/UserAuthContext";
+import imgset from "../../images/setting.png"
 import { Dropdown } from "react-bootstrap";
 import { DropdownItem } from "semantic-ui-react";
 
 
 
-function ProductList() {
+function Ships() {
   const [viewType] = useState({ grid: true });
-  // const [products, setProducts] = useState([])
-  // const getProducts = async (id) => {
-  //   try{
-  //     const products = query(collectionGroup(db, 'Products'),
-  //     orderBy('price', 'desc'));
-  //     const snapshot = await getDocs(products)
-
-  //     return snapshot.docs.map((doc) => ({
-  //       id: doc.id,
-  //       ...doc.data(),
-  //       price: Number(doc.data().price),
-  //     }))
-  //   } catch (error) {
-  //     console.log("did not get products")
-  //   }
-  // }
-  // useEffect(() => {
-  //   getProducts().then((products) => {
-  //     products.filter((item) => {
-  //       item.price = Number(item.price)
-  //     })
-  //     setProducts(products)
-  //     console.log(products)
-  //   })
-  // }, [])
 
   const [search, setSearch] = useState('')
 
@@ -69,19 +44,26 @@ function ProductList() {
 
   const { user } = useUserAuth();
   const [productarray, setProductArray] = useState([])
-  console.log(search)
+  //console.log(search)
 
   const retdata3 = async () => {
-    onSnapshot(collection(db, "Products"), (snapshot) => {
-      setProductArray(snapshot.docs.map((doc) => doc.data()))
-    }).then(docRef => {
-      console.log("Document Id:", docRef.id)
-    })
+    // onSnapshot(collection(db, "Products"), (snapshot) => {
+    //   setProductArray(snapshot.docs.map((doc) => doc.data()))
+    // }).then(docRef => {
+    //   console.log("Document Id:", docRef.id)
+    // })
+
+    const collectionRef = collection(db, "Products")
+    const q = query(collectionRef, where("keywords", "==", "Ship"))
+    const snapshot = await getDocs(q)
+
+    setProductArray(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
+
   }
   
   useEffect(() => {
     retdata3();
-  }, [user])
+  }, [])
   
 
   return (
@@ -106,10 +88,10 @@ function ProductList() {
                   <Dropdown.Item href="/category/Ships">Ships</Dropdown.Item>
                   <Dropdown.Item href="/category/Weapons">Weapons</Dropdown.Item>
                   <DropdownItem>---------Sorting---------</DropdownItem>
-                  <Dropdown.Item href="/category/Weapons">Top Ratings</Dropdown.Item>
-                  <Dropdown.Item href="/category/Weapons">Low Ratings</Dropdown.Item>
-                  <Dropdown.Item href="/category/Weapons">Price Desc</Dropdown.Item>
-                  <Dropdown.Item href="/category/Weapons">Price Asc</Dropdown.Item>
+                  <Dropdown.Item href="/category/Toprating">Top Ratings</Dropdown.Item>
+                  <Dropdown.Item href="/category/Lowrating">Low Ratings</Dropdown.Item>
+                  <Dropdown.Item href="/category/Pricedesc">Price Desc</Dropdown.Item>
+                  <Dropdown.Item href="/category/Priceasc">Price Asc</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
               <input
@@ -143,4 +125,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default Ships;
