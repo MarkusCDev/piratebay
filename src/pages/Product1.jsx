@@ -15,6 +15,7 @@ function Product1() {
   const { user } = useUserAuth();
   const { uid } = useParams()
   const [userdata, setUserData] = useState(null);
+  const [userr, setUserr] = useState(null);
 
 
   const [show, setShow] = useState(false);
@@ -37,9 +38,19 @@ function Product1() {
     console.log(x)
     console.log(y)
     setUserData(docSnap.data())
+
   }
+
+// const Userr = async () => {
+//   const o = {userdata?.seller}
+//   const docRef2 = doc(db, "Users", o)
+//     const docSnap2 = await getDoc(docRef2)
+//     setUserr(docSnap2.data())
+// }
+
   useEffect(() => {
     retdata();
+    //Userr();
   }, [user])
 
 
@@ -119,7 +130,7 @@ function Product1() {
                 <dd className="col-sm-8 mb-3">{userdata?.keywords}</dd>
 
                 <dt className="col-sm-4">Rating</dt>
-                <dd className="col-sm-8 mb-3">4.9/5.0</dd>
+                <dd className="col-sm-8 mb-3">{userr?.rating}/5</dd>
 
                 <dt className="col-sm-4">Seller</dt>
                 <dd className="col-sm-8 mb-3">{userdata?.seller}</dd>
@@ -133,6 +144,9 @@ function Product1() {
             <div>
             <button className="btn btn-dark py-2 w-40" onClick={handleShow}>
                 Report Item
+            </button>
+            <button className="ms-3 btn btn-dark py-2 w-40">
+                Add Review
             </button>
             <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -163,7 +177,7 @@ function Product1() {
         </div>
       </div>
     </div>
-    <div style = {{ marginTop: '50px '}}>
+    {/* <div style = {{ marginTop: '50px '}}>
     <div style = {{ marginTop: '25px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
                   Review 1
     </div>
@@ -173,7 +187,7 @@ function Product1() {
     <div style = {{ marginTop: '25px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
                   Review 3
     </div>
-    </div>
+    </div> */}
     </>
   );
 }

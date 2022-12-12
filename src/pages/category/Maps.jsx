@@ -1,17 +1,17 @@
-import PopularProduct from "./PopularProduct";
+import PopularProduct from "../PopularProduct";
 import { useState, useEffect } from "react";
-import searchimg from "../images/search.png"
-import { db } from "../firebase-config";
+import searchimg from "../../images/search.png"
+import { db } from "../../firebase-config";
 import { getDocs } from "@firebase/firestore";
-import { query, collectionGroup, orderBy, onSnapshot, collection } from "firebase/firestore";
-import { useUserAuth } from "../context/UserAuthContext";
-import imgset from "../images/setting.png"
+import { where, query, collectionGroup, orderBy, onSnapshot, collection } from "firebase/firestore";
+import { useUserAuth } from "../../context/UserAuthContext";
+import imgset from "../../images/setting.png"
 import { Dropdown } from "react-bootstrap";
 import { DropdownItem } from "semantic-ui-react";
 
 
 
-function ProductList() {
+function Maps() {
   const [viewType] = useState({ grid: true });
 
   const [search, setSearch] = useState('')
@@ -44,19 +44,26 @@ function ProductList() {
 
   const { user } = useUserAuth();
   const [productarray, setProductArray] = useState([])
-  console.log(search)
+  //console.log(search)
 
   const retdata3 = async () => {
-    onSnapshot(collection(db, "Products"), (snapshot) => {
-      setProductArray(snapshot.docs.map((doc) => doc.data()))
-    }).then(docRef => {
-      console.log("Document Id:", docRef.id)
-    })
+    // onSnapshot(collection(db, "Products"), (snapshot) => {
+    //   setProductArray(snapshot.docs.map((doc) => doc.data()))
+    // }).then(docRef => {
+    //   console.log("Document Id:", docRef.id)
+    // })
+
+    const collectionRef = collection(db, "Products")
+    const q = query(collectionRef, where("keywords", "==", "Map"))
+    const snapshot = await getDocs(q)
+
+    setProductArray(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
+
   }
   
   useEffect(() => {
     retdata3();
-  }, [user])
+  }, [])
   
 
   return (
@@ -104,7 +111,7 @@ function ProductList() {
             className={
               "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4 px-md-5 flex-shrink-0 " +
               (viewType.grid ? "row-cols-xl-3" : "row-cols-xl-2")}>
-            {
+            { 
               productarray.filter((product) => {
                 return search.toLowerCase() === '' ? product : product.title.toLowerCase().includes(search)
               }).map((product)  => (
@@ -118,4 +125,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default Maps;

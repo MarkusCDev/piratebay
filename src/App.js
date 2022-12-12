@@ -20,6 +20,13 @@ import CheckoutPage from './pages/Checkout';
 import Additem from './pages/Additem';
 import Banking from './pages/Banking';
 import Banner from './pages/Banner';
+import Boats from './pages/category/Boats';
+import Cannons from './pages/category/Cannons';
+import Maps from './pages/category/Maps';
+import Ships from './pages/category/Ships';
+import Weapons from './pages/category/Weapons';
+import Food from './pages/category/Food';
+
 
 const App = () => {
   return (
@@ -36,6 +43,12 @@ const App = () => {
         <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/products/:uid" element={<Product1 />} />
+        <Route path="/category/Boats" element={<Boats />} />
+        <Route path="/category/Cannons" element={<Cannons />} />
+        <Route path="/category/Food" element={<Food />} />
+        <Route path="/category/Maps" element={<Maps />} />
+        <Route path="/category/Ships" element={<Ships />} />
+        <Route path="/category/Weapons" element={<Weapons />} />
         <Route path="/checkout" element={<ProtectedRoute> <CheckoutPage /> </ProtectedRoute>} />
         <Route path="/banner" element={<Banner />} />
       </Routes>

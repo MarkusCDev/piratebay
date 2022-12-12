@@ -1,17 +1,17 @@
-import PopularProduct from "./PopularProduct";
+import PopularProduct from "../PopularProduct";
 import { useState, useEffect } from "react";
-import searchimg from "../images/search.png"
-import { db } from "../firebase-config";
+import searchimg from "../../images/search.png"
+import { db } from "../../firebase-config";
 import { getDocs } from "@firebase/firestore";
-import { query, collectionGroup, orderBy, onSnapshot, collection } from "firebase/firestore";
-import { useUserAuth } from "../context/UserAuthContext";
-import imgset from "../images/setting.png"
+import { where, query, collectionGroup, orderBy, onSnapshot, collection } from "firebase/firestore";
+import { useUserAuth } from "../../context/UserAuthContext";
+import imgset from "../../images/setting.png"
 import { Dropdown } from "react-bootstrap";
 import { DropdownItem } from "semantic-ui-react";
 
 
 
-function ProductList() {
+function Food() {
   const [viewType] = useState({ grid: true });
 
   const [search, setSearch] = useState('')
@@ -44,19 +44,26 @@ function ProductList() {
 
   const { user } = useUserAuth();
   const [productarray, setProductArray] = useState([])
-  console.log(search)
+  //console.log(search)
 
   const retdata3 = async () => {
-    onSnapshot(collection(db, "Products"), (snapshot) => {
-      setProductArray(snapshot.docs.map((doc) => doc.data()))
-    }).then(docRef => {
-      console.log("Document Id:", docRef.id)
-    })
+    // onSnapshot(collection(db, "Products"), (snapshot) => {
+    //   setProductArray(snapshot.docs.map((doc) => doc.data()))
+    // }).then(docRef => {
+    //   console.log("Document Id:", docRef.id)
+    // })
+
+    const collectionRef = collection(db, "Products")
+    const q = query(collectionRef, where("keywords", "==", "Food"))
+    const snapshot = await getDocs(q)
+
+    setProductArray(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
+
   }
   
   useEffect(() => {
     retdata3();
-  }, [user])
+  }, [])
   
 
   return (
@@ -118,4 +125,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default Food;
