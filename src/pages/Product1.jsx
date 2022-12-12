@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Image from "../images/psword.jpg";
 import { Link, useParams } from "react-router-dom";
-import Button from "@restart/ui/esm/Button";
 import { useUserAuth } from "../context/UserAuthContext";
 import { db } from "../firebase-config";
 import { getDoc, doc } from "firebase/firestore";
-
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
 
 function Product1() {
-  
+
   const { user } = useUserAuth();
   const { uid } = useParams()
   const [userdata, setUserData] = useState(null);
-  const [userr, setUserr] = useState(null);
-
+  const [userr] = useState(null);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -28,23 +24,21 @@ function Product1() {
 
     if (x == y) {
       console.log("same")
-    }else {
+    } else {
       console.log("not same")
     }
-
-
     const docRef = doc(db, "Products", x)
     const docSnap = await getDoc(docRef)
     console.log(x)
     console.log(y)
     setUserData(docSnap.data())
   }
-// const Userr = async () => {
-//   const o = {userdata?.seller}
-//   const docRef2 = doc(db, "Users", o)
-//     const docSnap2 = await getDoc(docRef2)
-//     setUserr(docSnap2.data())
-// }
+  // const Userr = async () => {
+  //   const o = {userdata?.seller}
+  //   const docRef2 = doc(db, "Users", o)
+  //     const docSnap2 = await getDoc(docRef2)
+  //     setUserr(docSnap2.data())
+  // }
   useEffect(() => {
     retdata();
     //Userr();
@@ -63,7 +57,7 @@ function Product1() {
                 <img
                   className="border rounded ratio ratio-1x1"
                   alt=""
-                  height = "500px"
+                  height="500px"
                   src={userdata?.imagelink}
                 />
               </div>
@@ -112,9 +106,7 @@ function Product1() {
                 </div>
               </div>
 
-
               {/* Description of product details */}
-
               <h4 className="mb-0">Details</h4>
               <hr />
               <dl className="row">
@@ -129,49 +121,48 @@ function Product1() {
                 <dt className="col-sm-4">Seller</dt>
                 <dd className="col-sm-8 mb-3">{userdata?.seller}</dd>
               </dl>
+              <h4 className="mb-0">Description</h4>
+              <hr />
+              <p className="lead flex-shrink-0">
+                <small>{userdata?.description}</small>
+              </p>
+              <div>
+                <button className="btn btn-dark py-2 w-40" onClick={handleShow}>
+                  Report Item
+                </button>
+                <button className="ms-3 btn btn-dark py-2 w-40">
+                  Add Review
+                </button>
+                <Modal show={show} onHide={handleClose}>
+                  <Modal.Header closeButton>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <Form>
+                      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Label>Reason :</Form.Label>
+                        <Form.Control
+                          type="email"
+                          autoFocus
+                        />
+                      </Form.Group>
+                      <Form.Group
+                        className="mb-3"
+                        controlId="exampleForm.ControlTextarea1"
+                      >
+                        <Form.Label>Report :</Form.Label>
+                        <Form.Control as="textarea" rows={3} />
+                      </Form.Group>
+                      <button style={{ float: 'right' }} className="btn btn-dark">Submit</button>
+                    </Form>
+                  </Modal.Body>
+                </Modal>
+              </div>
 
-            <h4 className="mb-0">Description</h4>
-            <hr />
-            <p className="lead flex-shrink-0">
-              <small>{userdata?.description}</small>
-            </p>
-            <div>
-            <button className="btn btn-dark py-2 w-40" onClick={handleShow}>
-                Report Item
-            </button>
-            <button className="ms-3 btn btn-dark py-2 w-40">
-                Add Review
-            </button>
-            <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Reason :</Form.Label>
-              <Form.Control
-                type="email"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Report :</Form.Label>
-              <Form.Control as="textarea" rows={3} />
-            </Form.Group>
-            <button style={{float: 'right'}} className="btn btn-dark">Submit</button>
-          </Form>
-        </Modal.Body>
-      </Modal>
             </div>
-
           </div>
         </div>
       </div>
-    </div>
-    {/* <div style = {{ marginTop: '50px '}}>
+      {/* <div style = {{ marginTop: '50px '}}>
     <div style = {{ marginTop: '25px '}} className="shadow-lg p-3 mb-5 bg-white rounded container">
                   Review 1
     </div>

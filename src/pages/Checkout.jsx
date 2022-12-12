@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'

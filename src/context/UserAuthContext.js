@@ -6,8 +6,6 @@ import {
   signOut
 } from "firebase/auth";
 import { auth } from "../firebase-config";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase-config";
 
 const userAuthContext = createContext();
 
@@ -23,11 +21,6 @@ export function UserAuthContextProvider({ children }) {
   function logOut() {
     return signOut(auth);
   }
-
-
-
-
-
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {

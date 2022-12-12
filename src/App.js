@@ -31,8 +31,6 @@ import Priceasc from './pages/category/Priceasc';
 import Lowrating from './pages/category/Lowrating';
 import Toprating from './pages/category/Toprating';
 
-
-
 const App = () => {
   return (
     <UserAuthContextProvider>

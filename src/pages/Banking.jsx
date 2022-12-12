@@ -2,14 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useUserAuth } from "../context/UserAuthContext";
 import { db } from "../firebase-config";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { useRef } from "react";
 import { Button } from "react-bootstrap";
 
-
 const Banking = () => {
-  const Deposit = () => { }
-  const [counter, setCounter] = useState(0)
-  const { user, logOut } = useUserAuth();
+  const { user } = useUserAuth();
   const [inputDepositRef, setDepositRef] = useState(0)
   const [inputWithdrawRef, setWithdrawRef] = useState(0)
   const handleClick1 = async () => {
@@ -55,36 +51,30 @@ const Banking = () => {
   }, [user])
 
   return (
-    <div className='row-cols-lg-3 g-4 px-md-5' style={{marginTop: '200px'}}>
+    <div className='row-cols-lg-3 g-4 px-md-5' style={{ marginTop: '200px' }}>
       <div className='justify-content-center align-items container shadow p-3 mb-5 bg-white rounded' >
-      <h3 className='text-center'>Banking</h3>
-
-
-      <div className="mt-3 text-center">
-        <h3 style={{color: 'green'}}>${userdata?.money}</h3>
-      </div>
-
-      <div className="mt-3">
-        <h3>Deposit</h3>
-        <input value={inputDepositRef}
-          type="number"
-          placeholder="Input deposit"
-          onChange={(e) => setDepositRef(e.target.value)} />
-        <Button style={{ marginLeft: '10px', width: '50px', height: '25px' }} className="btn btn-success" onClick={handleClick1}></Button>
-      </div>
-
-
-      <div className="mt-3">
-        <h3>Withdraw</h3>
-        <input value={inputWithdrawRef}
-          type="number"
-          placeholder="Input withdraw"
-          onChange={(e) => setWithdrawRef(e.target.value)} />
-        <Button style={{ marginLeft: '10px', width: '50px', height: '25px' }} className="btn btn-danger" onClick={handleClick2}></Button>
+        <h3 className='text-center'>Banking</h3>
+        <div className="mt-3 text-center">
+          <h3 style={{ color: 'green' }}>${userdata?.money}</h3>
+        </div>
+        <div className="mt-3">
+          <h3>Deposit</h3>
+          <input value={inputDepositRef}
+            type="number"
+            placeholder="Input deposit"
+            onChange={(e) => setDepositRef(e.target.value)} />
+          <Button style={{ marginLeft: '10px', width: '50px', height: '25px' }} className="btn btn-success" onClick={handleClick1}></Button>
+        </div>
+        <div className="mt-3">
+          <h3>Withdraw</h3>
+          <input value={inputWithdrawRef}
+            type="number"
+            placeholder="Input withdraw"
+            onChange={(e) => setWithdrawRef(e.target.value)} />
+          <Button style={{ marginLeft: '10px', width: '50px', height: '25px' }} className="btn btn-danger" onClick={handleClick2}></Button>
+        </div>
       </div>
     </div>
-    </div>
-
   )
 }
 export default Banking
