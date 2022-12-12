@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from "react";
-import img from "../images/banners/treasure-chest.jpg";
-import { Link } from "react-router-dom";
-import PopularProduct from "./PopularProduct";
-import Banner from "./Banner";
-import { useUserAuth } from "../context/UserAuthContext";
-import { doc, getDoc } from "@firebase/firestore";
-import { db } from "../firebase-config";
-import {
-  query,
-  getDocs,
-  collection,
-  getCountFromServer,
-  onSnapshot,
-  orderBy,
-} from "firebase/firestore";
+import React, { useState, useEffect} from 'react'
+import img from '../images/banners/treasure-chest.jpg';
+import { Link } from 'react-router-dom';
+import PopularProduct from './PopularProduct';
+import Banner from './Banner';
+import { useUserAuth } from '../context/UserAuthContext';
+import { doc, getDoc } from '@firebase/firestore';
+import { db } from '../firebase-config';
+import { query, getDocs, collection, getCountFromServer, onSnapshot, orderBy } from "firebase/firestore";
 
 const Home = () => {
   const { user } = useUserAuth();
@@ -28,15 +21,19 @@ const Home = () => {
   };
 
   const retdata3 = async () => {
-    const collectionRef = collection(db, "Products");
-    const q = query(collectionRef, orderBy("timestamp", "desc"));
-    const snapshot = await getDocs(q);
+<<<<<<<<< Temporary merge branch 1
+    onSnapshot(collection(db, "Products"), (snapshot) => {
+      setProductArray(snapshot.docs.map((doc) => doc.data()))
+    });
+=========
+    const collectionRef = collection(db, "Products")
+    const q = query(collectionRef, orderBy("timestamp", "desc"))
+    const snapshot = await getDocs(q)
 
-    setProductArray(
-      snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-    );
-  };
-
+    setProductArray(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
+>>>>>>>>> Temporary merge branch 2
+  }
+  
   useEffect(() => {
     retdata2();
     retdata3();

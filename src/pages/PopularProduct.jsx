@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import img from '../images/psword.jpg';
-import { Link, useParams } from 'react-router-dom';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../firebase-config';
-import { useUserAuth } from '../context/UserAuthContext';
+import React, { useEffect, useState } from "react";
+import img from "../images/psword.jpg";
+import { Link, useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase-config";
+import { useUserAuth } from "../context/UserAuthContext";
 
-const PopularProduct = ({pro_img, pro_title, pro_price, pro_uid, pro_rating}) => {
-
-
-  const prolinking = "/products/"
-  const redirect = prolinking + pro_uid
+const PopularProduct = ({
+  pro_img,
+  pro_title,
+  pro_price,
+  pro_uid,
+  pro_rating,
+}) => {
+  const prolinking = "/products/";
+  const redirect = prolinking + pro_uid;
 
   return (
     <div className="col">
@@ -34,7 +38,7 @@ const PopularProduct = ({pro_img, pro_title, pro_price, pro_uid, pro_rating}) =>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PopularProduct
+export default PopularProduct;

@@ -33,8 +33,6 @@ export default class Banner extends Component {
 
                     </div>
                     <div className="d-flex justify-content-center">
-                    
-                        
                         <img src={sot1} alt="background" style={{ height: '500px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover' }}></img>
                         <figcaption>
                             Become a Pirate
