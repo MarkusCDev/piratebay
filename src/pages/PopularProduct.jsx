@@ -6,8 +6,6 @@ import { db } from '../firebase-config';
 import { useUserAuth } from '../context/UserAuthContext';
 
 const PopularProduct = ({pro_img, pro_title, pro_price, pro_uid, pro_rating}) => {
-
-
   const prolinking = "/products/"
   const redirect = prolinking + pro_uid
 

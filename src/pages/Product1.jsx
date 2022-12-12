@@ -38,16 +38,13 @@ function Product1() {
     console.log(x)
     console.log(y)
     setUserData(docSnap.data())
-
   }
-
 // const Userr = async () => {
 //   const o = {userdata?.seller}
 //   const docRef2 = doc(db, "Users", o)
 //     const docSnap2 = await getDoc(docRef2)
 //     setUserr(docSnap2.data())
 // }
-
   useEffect(() => {
     retdata();
     //Userr();
@@ -115,6 +112,7 @@ function Product1() {
                 </div>
               </div>
 
+
               {/* Description of product details */}
 
               <h4 className="mb-0">Details</h4>
@@ -122,16 +120,12 @@ function Product1() {
               <dl className="row">
                 <dt className="col-sm-4">Product #:</dt>
                 <dd className="col-sm-8 mb-3">{uid}</dd>
-
                 <dt className="col-sm-4">Starting Bid:</dt>
                 <dd className="col-sm-8 mb-3">${userdata?.startbid} USD</dd>
-
                 <dt className="col-sm-4">Category</dt>
                 <dd className="col-sm-8 mb-3">{userdata?.keywords}</dd>
-
                 <dt className="col-sm-4">Rating</dt>
                 <dd className="col-sm-8 mb-3">{userr?.rating}/5</dd>
-
                 <dt className="col-sm-4">Seller</dt>
                 <dd className="col-sm-8 mb-3">{userdata?.seller}</dd>
               </dl>

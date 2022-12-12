@@ -26,7 +26,6 @@ const Home = () => {
     const collectionRef = collection(db, "Products")
     const q = query(collectionRef, orderBy("timestamp", "desc"))
     const snapshot = await getDocs(q)
-
     setProductArray(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
   }
   

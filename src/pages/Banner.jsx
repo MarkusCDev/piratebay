@@ -3,6 +3,8 @@ import Slider from "react-slick";
 import piratebay from '../images/banners/pirate-bay.png';
 import treasureChest from '../images/banners/treasure-chest.jpg';
 import legendOfTheSea from '../images/banners/legend-of-the-seas.jpg';
+import sot1 from '../images/banners/sot1.jpg'
+import sot2 from '../images/banners/sot2.jpg'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import sot1 from "../images/banners/sot1.jpg"
@@ -33,8 +35,6 @@ export default class Banner extends Component {
 
                     </div>
                     <div className="d-flex justify-content-center">
-                    
-                        
                         <img src={sot1} alt="background" style={{ height: '500px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover' }}></img>
                         <figcaption>
                             Become a Pirate

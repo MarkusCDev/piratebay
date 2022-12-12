@@ -13,6 +13,31 @@ import { DropdownItem } from "semantic-ui-react";
 
 function ProductList() {
   const [viewType] = useState({ grid: true });
+  // const [products, setProducts] = useState([])
+  // const getProducts = async (id) => {
+  //   try{
+  //     const products = query(collectionGroup(db, 'Products'),
+  //     orderBy('price', 'desc'));
+  //     const snapshot = await getDocs(products)
+
+  //     return snapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //       price: Number(doc.data().price),
+  //     }))
+  //   } catch (error) {
+  //     console.log("did not get products")
+  //   }
+  // }
+  // useEffect(() => {
+  //   getProducts().then((products) => {
+  //     products.filter((item) => {
+  //       item.price = Number(item.price)
+  //     })
+  //     setProducts(products)
+  //     console.log(products)
+  //   })
+  // }, [])
 
   const [search, setSearch] = useState('')
 
