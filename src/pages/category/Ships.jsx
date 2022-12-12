@@ -88,10 +88,10 @@ function Ships() {
                   <Dropdown.Item href="/category/Ships">Ships</Dropdown.Item>
                   <Dropdown.Item href="/category/Weapons">Weapons</Dropdown.Item>
                   <DropdownItem>---------Sorting---------</DropdownItem>
-                  <Dropdown.Item href="/category/Weapons">Top Ratings</Dropdown.Item>
-                  <Dropdown.Item href="/category/Weapons">Low Ratings</Dropdown.Item>
-                  <Dropdown.Item href="/category/Weapons">Price Desc</Dropdown.Item>
-                  <Dropdown.Item href="/category/Weapons">Price Asc</Dropdown.Item>
+                  <Dropdown.Item href="/category/Toprating">Top Ratings</Dropdown.Item>
+                  <Dropdown.Item href="/category/Lowrating">Low Ratings</Dropdown.Item>
+                  <Dropdown.Item href="/category/Pricedesc">Price Desc</Dropdown.Item>
+                  <Dropdown.Item href="/category/Priceasc">Price Asc</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
               <input

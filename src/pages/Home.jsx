@@ -6,7 +6,7 @@ import Banner from './Banner';
 import { useUserAuth } from '../context/UserAuthContext';
 import { doc, getDoc } from '@firebase/firestore';
 import { db } from '../firebase-config';
-import { collection, getCountFromServer, onSnapshot, orderBy } from "firebase/firestore";
+import { query, getDocs, collection, getCountFromServer, onSnapshot, orderBy } from "firebase/firestore";
 
 const Home = () => {
   
@@ -23,9 +23,11 @@ const Home = () => {
     }
 
   const retdata3 = async () => {
-    onSnapshot(collection(db, "Products"), (snapshot) => {
-      setProductArray(snapshot.docs.map((doc) => doc.data()))
-    });
+    const collectionRef = collection(db, "Products")
+    const q = query(collectionRef, orderBy("timestamp", "desc"))
+    const snapshot = await getDocs(q)
+
+    setProductArray(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
   }
   
   useEffect(() => {
@@ -57,6 +59,7 @@ const Home = () => {
               Browse Products
             </Link>
           </div>
+          <h3 className='justify-content-center text-center align-items'>Newest Products</h3>
         </div>
       </div>
 

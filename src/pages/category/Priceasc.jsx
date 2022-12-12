@@ -11,7 +11,7 @@ import { DropdownItem } from "semantic-ui-react";
 
 
 
-function Weapons() {
+function Priceasc() {
   const [viewType] = useState({ grid: true });
 
   const [search, setSearch] = useState('')
@@ -54,7 +54,7 @@ function Weapons() {
     // })
 
     const collectionRef = collection(db, "Products")
-    const q = query(collectionRef, where("keywords", "==", "Weapon"))
+    const q = query(collectionRef, orderBy("price", "asc"))
     const snapshot = await getDocs(q)
 
     setProductArray(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
@@ -115,7 +115,7 @@ function Weapons() {
               productarray.filter((product) => {
                 return search.toLowerCase() === '' ? product : product.title.toLowerCase().includes(search)
               }).map((product)  => (
-                <PopularProduct key={product.uid} pro_img={product.imagelink} pro_title={product.title} pro_price={product.price} pro_uid={product.uid}/>
+                <PopularProduct pro_img={product.imagelink} pro_title={product.title} pro_price={product.price} pro_uid={product.uid}/>
               ))
             }
           </div>
@@ -125,4 +125,4 @@ function Weapons() {
   );
 }
 
-export default Weapons;
+export default Priceasc;

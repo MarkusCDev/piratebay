@@ -26,6 +26,11 @@ import Maps from './pages/category/Maps';
 import Ships from './pages/category/Ships';
 import Weapons from './pages/category/Weapons';
 import Food from './pages/category/Food';
+import Pricedesc from './pages/category/Pricedesc';
+import Priceasc from './pages/category/Priceasc';
+import Lowrating from './pages/category/Lowrating';
+import Toprating from './pages/category/Toprating';
+
 
 
 const App = () => {
@@ -49,6 +54,10 @@ const App = () => {
         <Route path="/category/Maps" element={<Maps />} />
         <Route path="/category/Ships" element={<Ships />} />
         <Route path="/category/Weapons" element={<Weapons />} />
+        <Route path="/category/Pricedesc" element={<Pricedesc />} />
+        <Route path="/category/Priceasc" element={<Priceasc />} />
+        <Route path="/category/Toprating" element={<Toprating />} />
+        <Route path="/category/Lowrating" element={<Lowrating />} />
         <Route path="/checkout" element={<ProtectedRoute> <CheckoutPage /> </ProtectedRoute>} />
         <Route path="/banner" element={<Banner />} />
       </Routes>
