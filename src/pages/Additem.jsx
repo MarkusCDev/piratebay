@@ -18,6 +18,7 @@ import {
 import { db } from "../firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { serverTimestamp, updateDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Additem = () => {
   // const items = query(collection(db, "Products"))
@@ -52,9 +53,6 @@ const Additem = () => {
       }
     } else {
       console.log("please select your file");
-    }
-    else {
-      console.log('Please select your file');
     }
   }
 

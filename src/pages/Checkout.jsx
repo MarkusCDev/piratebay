@@ -74,7 +74,6 @@ const stateOptions = [
   { key: "DC", text: "District of Columbia", value: "District of Columbia" },
 ];
 
-
 const CheckoutPage = () => {
   const { user } = useUserAuth();
   // User info
@@ -117,7 +116,7 @@ const CheckoutPage = () => {
 
     setSubtotal(totalPrice);
     //console.log("bakidd " + docSnap.data().cartitems.length);
-    if (docSnap.data().cartitems.length == 0 | docSnap.data().money < totalPrice){
+    if (docSnap.data().cartitems.length == 0 | docSnap.data().money < totalPrice) {
       navigate("/");
     }
   };
@@ -125,34 +124,32 @@ const CheckoutPage = () => {
   ;
 
   const Completepurchase = async () => {
-   
+
     const docRef0 = doc(db, "Users", user.email);
     const docSnap = await getDoc(docRef0);
     const arritems = docSnap.data().cartitems
+    arritems.forEach(async (item) => {
+      const x = item.id;
+      const docRef2 = doc(db, "Products", x);
+      const docSnap2 = await getDoc(docRef2);
 
-
-     arritems.forEach(async (item) => {
-       const x = item.id;
-       const docRef2 = doc(db, "Products", x);
-       const docSnap2 = await getDoc(docRef2);
-
-       const owner = docSnap2.data().seller;
-       const docRef3 = doc(db, "Users", owner);
-       const docSnap3 = await getDoc(docRef3);
-       const newbalance = docSnap3.data().money + item.price;
-       //console.log("newbalance: " + newbalance);
-       //console.log(docSnap3.data().money);
-       await updateDoc(docRef3, {
-         money: newbalance,
-       });
+      const owner = docSnap2.data().seller;
+      const docRef3 = doc(db, "Users", owner);
+      const docSnap3 = await getDoc(docRef3);
+      const newbalance = docSnap3.data().money + item.price;
+      //console.log("newbalance: " + newbalance);
+      //console.log(docSnap3.data().money);
+      await updateDoc(docRef3, {
+        money: newbalance,
+      });
 
       const prodata = {
-      id: item.id,
-      title: item.title,
-      price: item.price,
-      quantity: 1,
-      img: item.img,
-      seller: item.seller,
+        id: item.id,
+        title: item.title,
+        price: item.price,
+        quantity: 1,
+        img: item.img,
+        seller: item.seller,
       };
 
       console.log("prodata: ", prodata)
@@ -162,9 +159,9 @@ const CheckoutPage = () => {
         history: arrayUnion(prodata)
       })
 
-        // TODO: uncomment before presentation, deletes items when bought
-       //await deleteDoc(doc(db, "Products", x));
-     });
+      // TODO: uncomment before presentation, deletes items when bought
+      //await deleteDoc(doc(db, "Products", x));
+    });
 
     //empty cart
     const totalPrice = docSnap
@@ -174,11 +171,11 @@ const CheckoutPage = () => {
     const u = docSnap.data().money
     const nu = u - totalPrice
     console.log(totalPrice)
-    console.log(typeof(totalPrice))
+    console.log(typeof (totalPrice))
 
     const docRef2 = doc(db, "Users", user.email);
     await updateDoc(docRef2, {
-      money: nu, 
+      money: nu,
       cartitems: [],
     });
     window.location.reload(true);
@@ -208,7 +205,7 @@ const CheckoutPage = () => {
                 name="name"
                 label="Name"
                 placeholder="Name"
-                // value={name}
+              // value={name}
               />
               <FormInput
                 required={"true"}
@@ -218,7 +215,7 @@ const CheckoutPage = () => {
                 placeholder="Email"
                 type="email"
                 value={user && user.email}
-                // onChange={setEmail}
+              // onChange={setEmail}
               />
             </FormGroup>
             <FormGroup>
@@ -228,8 +225,8 @@ const CheckoutPage = () => {
                 name="address1"
                 label="Address 1"
                 placeholder="Address 1"
-                // value={address1}
-                // onChange={setAddress}
+              // value={address1}
+              // onChange={setAddress}
               />
             </FormGroup>
             <FormGroup>
@@ -239,8 +236,8 @@ const CheckoutPage = () => {
                 placeholder="City"
                 name="city"
                 onChange={(e) => setCity(e.target.value)}
-                // value={city}
-                // onChange={setCity}
+              // value={city}
+              // onChange={setCity}
               />
               <FormInput
                 required={"true"}
@@ -250,8 +247,8 @@ const CheckoutPage = () => {
                 name="state"
                 options={stateOptions}
                 onChange={(e) => setStateName(e.target.value)}
-                // value={stateName}
-                // onChange={setStateName}
+              // value={stateName}
+              // onChange={setStateName}
               />
             </FormGroup>
             <FormGroup>
@@ -261,8 +258,8 @@ const CheckoutPage = () => {
                 placeholder="Zipcode"
                 name="zipcode"
                 type="number"
-                // value={zipcode}
-                // onChange={setZipcode}
+              // value={zipcode}
+              // onChange={setZipcode}
               />
             </FormGroup>
           </Form>
@@ -281,7 +278,7 @@ const CheckoutPage = () => {
                   label="Name on card"
                   placeholder="John Doe"
                   name="name"
-                  // value={name}
+                // value={name}
                 />
                 <FormInput
                   required={"true"}
@@ -289,7 +286,7 @@ const CheckoutPage = () => {
                   placeholder="Card number"
                   name="cardnumber"
                   type="number"
-                  // value={cardnumber}
+                // value={cardnumber}
                 />
               </FormGroup>
               <FormField
