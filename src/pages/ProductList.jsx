@@ -1,22 +1,20 @@
 import PopularProduct from "./PopularProduct";
 import { useState, useEffect } from "react";
-import searchimg from "../images/search.png";
+import searchimg from "../images/search.png"
 import { db } from "../firebase-config";
-import { getDocs } from "@firebase/firestore";
-import {
-  query,
-  collectionGroup,
-  orderBy,
-  onSnapshot,
-  collection,
-} from "firebase/firestore";
+import { onSnapshot, collection } from "firebase/firestore";
 import { useUserAuth } from "../context/UserAuthContext";
-import imgset from "../images/setting.png";
 import { Dropdown } from "react-bootstrap";
 import { DropdownItem } from "semantic-ui-react";
 
 function ProductList() {
   const [viewType] = useState({ grid: true });
+  // const [products, setProducts] = useState([])
+  // const getProducts = async (id) => {
+  //   try{
+  //     const products = query(collectionGroup(db, 'Products'),
+  //     orderBy('price', 'desc'));
+  //     const snapshot = await getDocs(products)
 
   //     return snapshot.docs.map((doc) => ({
   //       id: doc.id,
@@ -37,7 +35,7 @@ function ProductList() {
   //   })
   // }, [])
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('')
 
   // const [products, setProducts] = useState([])
   // const getProducts = async (id) => {
@@ -66,20 +64,21 @@ function ProductList() {
   // }, [])
 
   const { user } = useUserAuth();
-  const [productarray, setProductArray] = useState([]);
-  console.log(search);
+  const [productarray, setProductArray] = useState([])
+  console.log(search)
 
   const retdata3 = async () => {
     onSnapshot(collection(db, "Products"), (snapshot) => {
-      setProductArray(snapshot.docs.map((doc) => doc.data()));
-    }).then((docRef) => {
-      console.log("Document Id:", docRef.id);
-    });
-  };
+      setProductArray(snapshot.docs.map((doc) => doc.data()))
+    }).then(docRef => {
+      console.log("Document Id:", docRef.id)
+    })
+  }
 
   useEffect(() => {
     retdata3();
-  }, [user]);
+  }, [user])
+
 
   return (
     <div className="container mt-5 py-4 px-xl-5 justify-content-center">
@@ -97,28 +96,16 @@ function ProductList() {
                     <DropdownItem>-------Categories-------</DropdownItem>
                     <Dropdown.Item href="/products">All</Dropdown.Item>
                     <Dropdown.Item href="/category/Boats">Boats</Dropdown.Item>
-                    <Dropdown.Item href="/category/Cannons">
-                      Cannons
-                    </Dropdown.Item>
+                    <Dropdown.Item href="/category/Cannons">Cannons</Dropdown.Item>
                     <Dropdown.Item href="/category/Food">Food</Dropdown.Item>
                     <Dropdown.Item href="/category/Maps">Maps</Dropdown.Item>
                     <Dropdown.Item href="/category/Ships">Ships</Dropdown.Item>
-                    <Dropdown.Item href="/category/Weapons">
-                      Weapons
-                    </Dropdown.Item>
+                    <Dropdown.Item href="/category/Weapons">Weapons</Dropdown.Item>
                     <DropdownItem>---------Sorting---------</DropdownItem>
-                    <Dropdown.Item href="/category/Toprating">
-                      Top Ratings
-                    </Dropdown.Item>
-                    <Dropdown.Item href="/category/Lowrating">
-                      Low Ratings
-                    </Dropdown.Item>
-                    <Dropdown.Item href="/category/Pricedesc">
-                      Price Desc
-                    </Dropdown.Item>
-                    <Dropdown.Item href="/category/Priceasc">
-                      Price Asc
-                    </Dropdown.Item>
+                    <Dropdown.Item href="/category/Weapons">Top Ratings</Dropdown.Item>
+                    <Dropdown.Item href="/category/Weapons">Low Ratings</Dropdown.Item>
+                    <Dropdown.Item href="/category/Weapons">Price Desc</Dropdown.Item>
+                    <Dropdown.Item href="/category/Weapons">Price Asc</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
                 <input
@@ -128,12 +115,8 @@ function ProductList() {
                   aria-label="search input"
                   onChange={(e) => setSearch(e.target.value)}
                 />
-                <button className="btn btn-outline-dark">dbwork
-                  <img
-                    src={searchimg}
-                    alt="search icon"
-                    style={{ width: "15px", height: "15px" }}
-                  />
+                <button className="btn btn-outline-dark">
+                  <img src={searchimg} alt="search icon" style={{ width: '15px', height: '15px' }} />
                 </button>
               </div>
             </div>
@@ -141,7 +124,6 @@ function ProductList() {
           <div
             className={
               "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4 px-md-5 flex-shrink-0 " +
-              (viewType.grid ? "row-cols-xl-3" : "row-cols-xl-2")
               (viewType.grid ? "row-cols-xl-3" : "row-cols-xl-2")}>
             {
               productarray.filter((product) => {
@@ -150,22 +132,6 @@ function ProductList() {
                 <PopularProduct key={product.uid} pro_img={product.imagelink} pro_title={product.title} pro_price={product.price} pro_uid={product.uid} />
               ))
             }
-          >
-            {productarray
-              .filter((product) => {
-                return search.toLowerCase() === ""
-                  ? product
-                  : product.title.toLowerCase().includes(search);
-              })
-              .map((product) => (
-                <PopularProduct
-                  key={product.uid}
-                  pro_img={product.imagelink}
-                  pro_title={product.title}
-                  pro_price={product.price}
-                  pro_uid={product.uid}
-                />
-              ))}
           </div>
         </div>
       </div>
