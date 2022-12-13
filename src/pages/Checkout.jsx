@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Alert from "react-bootstrap/Alert";
 import "semantic-ui-css/semantic.min.css";
+import { useNavigate, redirect } from "react-router-dom";
 import { db } from "../firebase-config";
 import {
   FormGroup,
@@ -16,6 +18,7 @@ import {
   Icon,
 } from "semantic-ui-react";
 import { useUserAuth } from "../context/UserAuthContext";
+import { doc, getDoc, updateDoc, deleteDoc, arrayUnion, setDoc } from "@firebase/firestore";
 
 const stateOptions = [
   { key: "AL", text: "Alabama", value: "Alabama" },
@@ -73,7 +76,6 @@ const stateOptions = [
 
 const CheckoutPage = () => {
   const { user } = useUserAuth();
-
   // User info
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -94,11 +96,111 @@ const CheckoutPage = () => {
       .catch(alert);
   };
 
+  const [userdata, setUserData] = useState(null);
+  const [productarray, setProductArray] = useState([]);
+  const [subtotal, setSubtotal] = useState(0);
+  const navigate = useNavigate();
+
+  const retdata = async () => {
+    const docRef = doc(db, "Users", user.email);
+    const docSnap = await getDoc(docRef);
+    // if (docSnap.exists()) {
+    //   console.log("Document data:", docSnap.data().email);
+    setUserData(docSnap.data());
+    console.log(docSnap.data().cartitems);
+    setProductArray(docSnap.data().cartitems);
+    const totalPrice = docSnap
+      .data()
+      .cartitems.map((item) => item.price) // get the price from each array
+      .reduce((acc, price) => acc + price, 0); // add the prices together
+
+    setSubtotal(totalPrice);
+    //console.log("bakidd " + docSnap.data().cartitems.length);
+    if (docSnap.data().cartitems.length == 0 | docSnap.data().money < totalPrice){
+      navigate("/");
+    }
+
+
+
+
+
+  };
+
+  ;
+
+  const Completepurchase = async () => {
+   
+    const docRef0 = doc(db, "Users", user.email);
+    const docSnap = await getDoc(docRef0);
+    const arritems = docSnap.data().cartitems
+
+
+     arritems.forEach(async (item) => {
+       const x = item.id;
+       const docRef2 = doc(db, "Products", x);
+       const docSnap2 = await getDoc(docRef2);
+
+       const owner = docSnap2.data().seller;
+       const docRef3 = doc(db, "Users", owner);
+       const docSnap3 = await getDoc(docRef3);
+       const newbalance = docSnap3.data().money + item.price;
+       //console.log("newbalance: " + newbalance);
+       //console.log(docSnap3.data().money);
+       await updateDoc(docRef3, {
+         money: newbalance,
+       });
+
+      const prodata = {
+      id: item.id,
+      title: item.title,
+      price: item.price,
+      quantity: 1,
+      img: item.img,
+      seller: item.seller,
+      };
+
+      console.log("prodata: ", prodata)
+
+      const dbbRef = doc(db, "Users", user.email)
+      await updateDoc(dbbRef, {
+        history: arrayUnion(prodata)
+      })
+
+        // TODO: uncomment before presentation, deletes items when bought
+       //await deleteDoc(doc(db, "Products", x));
+     });
+
+    //empty cart
+    const totalPrice = docSnap
+      .data()
+      .cartitems.map((item) => item.price) // get the price from each array
+      .reduce((acc, price) => acc + price, 0);
+    const u = docSnap.data().money
+    const nu = u - totalPrice
+    console.log(totalPrice)
+    console.log(typeof(totalPrice))
+
+    const docRef2 = doc(db, "Users", user.email);
+    await updateDoc(docRef2, {
+      money: nu, 
+      cartitems: [],
+    });
+    window.location.reload(true);
+
+  };
+
+  useEffect(() => {
+    retdata();
+  }, [user]);
+
   return (
     <div className="row-cols-lg-3 g-4 px-md-5" style={{ marginTop: "200px" }}>
       <div className="justify-content-center align-items container shadow p-3 mb-5 bg-white rounded">
         <h3 className="text-center">Account Info</h3>
         <div>
+          <h3>
+            Subtoal: <h2 style={{ color: "green" }}>${subtotal} USD</h2>
+          </h3>
           <h3>
             <u> Shipping address </u>
           </h3>
@@ -168,55 +270,65 @@ const CheckoutPage = () => {
               />
             </FormGroup>
           </Form>
-        </div>
-      </div>
-      <div className="row-cols-lg-3 g-4 px-md-5" style={{ marginTop: "50px" }}>
-        <div className="justify-content-center align-items container shadow p-3 mb-5 bg-white rounded">
-          <h3 className="text-center">Credit Card Information</h3>
-          <p>
-            <b> Please fill out your card information.</b>
-          </p>
-          <Form widths={"equal"} className="align-items-left">
-            <FormGroup>
-              <FormInput
-                required={"true"}
-                control={Input}
-                label="Name on card"
-                placeholder="John Doe"
-                name="name"
-                // value={name}
+          <div>
+            <h3>
+              <u>Credit Card Information</u>
+            </h3>
+            <p>
+              <b> Please fill out your card information.</b>
+            </p>
+            <Form widths={"equal"} className="align-items-left">
+              <FormGroup>
+                <FormInput
+                  required={"true"}
+                  control={Input}
+                  label="Name on card"
+                  placeholder="John Doe"
+                  name="name"
+                  // value={name}
+                />
+                <FormInput
+                  required={"true"}
+                  label="Card Number"
+                  placeholder="Card number"
+                  name="cardnumber"
+                  type="number"
+                  // value={cardnumber}
+                />
+              </FormGroup>
+              <FormField
+                control={Checkbox}
+                label="I agree to the Terms and Conditions"
               />
-              <FormInput
-                required={"true"}
-                label="Card Number"
-                placeholder="Card number"
-                name="cardnumber"
-                type="number"
-                // value={cardnumber}
-              />
-            </FormGroup>
-            <FormField
-              control={Checkbox}
-              label="I agree to the Terms and Conditions"
-            />
-            <FormField>
-              <label style={{ color: "red", fontSize: "15x" }}>
-                {" "}
-                * Required Field{" "}
-              </label>
-            </FormField>
-            <FormGroup>
-              <Link to="/cart">
-                <Button onClick={Push} content="Back to Cart" />
-              </Link>
-              <Button onClick={Push}>Submit</Button>
-            </FormGroup>
-            <FormGroup>
-              <Button circular icon="google pay" color="twitter" size="huge" />
-              <Button circular icon="amazon pay" color="twitter" size="huge" />
-              <Button circular icon="apple pay" color="twitter" size="huge" />
-            </FormGroup>
-          </Form>
+              <FormField>
+                <label style={{ color: "red", fontSize: "14x" }}>
+                  {" "}
+                  * Required Field{" "}
+                </label>
+              </FormField>
+              <FormGroup>
+                <Link to="/cart">
+                  <Button content="Back to Cart" />
+                </Link>
+                <Button onClick={Completepurchase}>Submit</Button>
+              </FormGroup>
+              <FormGroup>
+                <Button
+                  circular
+                  icon="google pay"
+                  color="twitter"
+                  size="huge"
+                />
+                <Button
+                  circular
+                  icon="amazon pay"
+                  color="twitter"
+                  size="huge"
+                />
+                <Button circular icon="apple pay" color="twitter" size="huge" />
+              </FormGroup>
+            </Form>
+          </div>
         </div>
       </div>
     </div>

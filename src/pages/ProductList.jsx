@@ -107,16 +107,16 @@ function ProductList() {
                       Weapons
                     </Dropdown.Item>
                     <DropdownItem>---------Sorting---------</DropdownItem>
-                    <Dropdown.Item href="/category/Weapons">
+                    <Dropdown.Item href="/category/Toprating">
                       Top Ratings
                     </Dropdown.Item>
-                    <Dropdown.Item href="/category/Weapons">
+                    <Dropdown.Item href="/category/Lowrating">
                       Low Ratings
                     </Dropdown.Item>
-                    <Dropdown.Item href="/category/Weapons">
+                    <Dropdown.Item href="/category/Pricedesc">
                       Price Desc
                     </Dropdown.Item>
-                    <Dropdown.Item href="/category/Weapons">
+                    <Dropdown.Item href="/category/Priceasc">
                       Price Asc
                     </Dropdown.Item>
                   </Dropdown.Menu>

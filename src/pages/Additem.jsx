@@ -4,48 +4,58 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
 import { storage } from "../firebase-config";
-import { collection, snapshot, onSnapshot, addDoc, getDoc, setDoc, doc, query, where, getCountFromServer } from "firebase/firestore"
+import {
+  collection,
+  snapshot,
+  onSnapshot,
+  addDoc,
+  getDoc,
+  setDoc,
+  doc,
+  query,
+  where,
+  getCountFromServer,
+} from "firebase/firestore";
 import { db } from "../firebase-config";
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { serverTimestamp, updateDoc } from "firebase/firestore";
 
 const Additem = () => {
-
-  // const items = query(collection(db, "Products"))  
+  // const items = query(collection(db, "Products"))
   // console.log(items)
   // console.log('test')
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [keywords, setKeywords] = useState('');
-  const [timelimit, setTimelimit] = useState('');
-  const [price, setPrice] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [keywords, setKeywords] = useState("");
+  const [timelimit, setTimelimit] = useState("");
+  const [price, setPrice] = useState("");
   const [image, setImage] = useState(null);
-  const [imagelink, setImageLink] = useState('');
+  const [imagelink, setImageLink] = useState("");
   const [startbid, setStartBid] = useState(0);
 
-  const [imageError, setImageError] = useState('');
-  const [successMsg, setSuccessMsg] = useState('');
-  const [uploadError, setUploadError] = useState('');
+  const [imageError, setImageError] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+  const [uploadError, setUploadError] = useState("");
 
-  const types = ['image/jpg', 'image/png', 'image/jpeg', 'image/PNG'];
+  const types = ["image/jpg", "image/png", "image/jpeg", "image/PNG"];
+
+  let navigate = useNavigate();
 
   const handleProductImg = (e) => {
     let selectedFile = e.target.files[0];
     if (selectedFile) {
       if (selectedFile && types.includes(selectedFile.type)) {
         setImage(selectedFile);
-        setImageError('');
-      }
-      else {
+        setImageError("");
+      } else {
         setImage(null);
-        setImageError('please select a valid file type (jpg or png')
+        setImageError("please select a valid file type (jpg or png");
       }
+    } else {
+      console.log("please select your file");
     }
-    else {
-      console.log('please select your file');
-    }
-  }
+  };
 
   //const dbRef = collection(db, "Products")
   const { user } = useUserAuth();
@@ -55,46 +65,47 @@ const Additem = () => {
     description: { description },
     price: { price },
     keywords: { keywords },
-    timelimit: { timelimit }
-  }
+    timelimit: { timelimit },
+  };
 
   const handleAddProducts = (e) => {
     e.preventDefault();
-    const storageRef = ref(storage, 'product-images${title.toUpperCase()}/${Date.now()}')
-    uploadBytes(storageRef, image)
-      .then(() => {
-        getDownloadURL(storageRef).then(async url => {
-          await addDoc(collection(db, 'Products'), {
-            seller: user.email,
-            title,
-            description,
-            price,
-            keywords,
-            timelimit,
-            image: url,
-            imagelink,
-            timestamp: serverTimestamp(),
-            currentbid: 0,
-            startbid,
-            uid: ""
-          }).then(async docRef => {
-            console.log("Document Id:", docRef.id)
-
-            console.log(typeof(docRef.id))
-            const dref = doc(db, "Products", docRef.id)
-            await updateDoc(dref, {
-            uid: docRef.id
-             });
-
-
-
-          }).catch(error => {
-            console.log("Error adding document:", error)
-          })
+    const storageRef = ref(
+      storage,
+      "product-images${title.toUpperCase()}/${Date.now()}"
+    );
+    uploadBytes(storageRef, image).then(() => {
+      getDownloadURL(storageRef).then(async (url) => {
+        await addDoc(collection(db, "Products"), {
+          seller: user.email,
+          title,
+          description,
+          price,
+          keywords,
+          timelimit,
+          image: url,
+          imagelink,
+          timestamp: serverTimestamp(),
+          currentbid: 0,
+          startbid,
+          uid: "",
         })
-      })
+          .then(async (docRef) => {
+            console.log("Document Id:", docRef.id);
 
-  }
+            console.log(typeof docRef.id);
+            const dref = doc(db, "Products", docRef.id);
+            await updateDoc(dref, {
+              uid: docRef.id,
+            });
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log("Error adding document:", error);
+          });
+      });
+    });
+  };
 
   //  DO NOT DELETE THIS! WILL NEED THIS IN THE FUTURE.
   //   const handleAddProducts = async () =>{
@@ -110,12 +121,11 @@ const Additem = () => {
   //     })
   // }
 
-  // get count of products 
+  // get count of products
   // const retdata = async () => {
   //   const snapshot = await getCountFromServer(dbRef)
-  //   console.log('count:', snapshot.data().count) 
+  //   console.log('count:', snapshot.data().count)
   // }
-
 
   // get specific collection data
   // const retdata = async () => {
@@ -131,14 +141,17 @@ const Additem = () => {
 
   return (
     <>
-      <div style={{ marginTop: '200px' }}></div>
+      <div style={{ marginTop: "200px" }}></div>
       <div className="container align-item justify-content-center shadow-lg p-5 mb-5 bg-white rounded">
+        <div className="text-center">
+          <h3>Add Item</h3>
+        </div>
 
-        <div className="text-center"><h3>Add Item</h3></div>
-
-        {successMsg && <>
-          <div>{successMsg}</div>
-        </>}
+        {successMsg && (
+          <>
+            <div>{successMsg}</div>
+          </>
+        )}
         {/* <Button onClick={retdata}>Count</Button> */}
         <Form onSubmit={handleAddProducts}>
           <Form.Group className="mb-3" controlId="formBasicTitle">
@@ -196,11 +209,10 @@ const Additem = () => {
             />
           </Form.Group>
 
-
           <Form.Group className="mb-3" controlId="formBasicPricerange">
             <Form.Label>Buy Now Price</Form.Label>
             <Form.Control
-              type="pricerange"
+              type="number"
               placeholder="Buy Now Price"
               required
               onChange={(e) => setPrice(e.target.value)}
@@ -216,11 +228,15 @@ const Additem = () => {
               onChange={handleProductImg}
             />
           </Form.Group>
-          <Button className="btn btn-success mb-3" type="submit">ADD</Button>
+          <Button className="btn btn-success mb-3" type="submit">
+            ADD
+          </Button>
 
-          {imageError && <>
-            <div>{imageError}</div>
-          </>}
+          {imageError && (
+            <>
+              <div>{imageError}</div>
+            </>
+          )}
 
           {/* <Form.Group className="mb-3" controlId="formBasicExtraphotos">
             <Form.Label>Extra photos</Form.Label>
@@ -242,7 +258,6 @@ const Additem = () => {
             />
           </Form.Group>
 
-
           <div className="d-grid gap-2 mb-2">
             <Button variant="btn btn-primary" type="Submit">
               Submit Item Request
@@ -250,13 +265,14 @@ const Additem = () => {
           </div>
         </Form>
 
-        {uploadError && <>
-          <div>{uploadError}</div>
-        </>}
-
+        {uploadError && (
+          <>
+            <div>{uploadError}</div>
+          </>
+        )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Additem
+export default Additem;
