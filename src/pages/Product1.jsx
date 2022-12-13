@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useUserAuth } from "../context/UserAuthContext";
 import { db } from "../firebase-config";
-import { getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { getDoc, doc, updateDoc, arrayUnion, addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { Button, Form } from "react-bootstrap";
 
 import Modal from "react-bootstrap/Modal";
@@ -18,6 +18,19 @@ function Product1() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+    const [timeLeft, setTimeLeft] = useState(86400);
+
+    const tick = async () => {
+      if (timeLeft > 0) {
+        setTimeLeft(timeLeft - 1);
+      }
+    };
+
+    const days = Math.floor(timeLeft / 86400);
+    const hours = Math.floor((timeLeft % 86400) / 3600);
+    const minutes = Math.floor((timeLeft % 3600) / 60);
+    const seconds = timeLeft % 60;
 
   const retdata = async () => {
     const x = uid;
@@ -83,17 +96,62 @@ function Product1() {
 
     if (highestbid >= docSnap.data().startbid && docSnap0.data().money >= highestbid) {
       await updateDoc(docRef, {
-        startbid: highestbid,
+        startbid: newbid,
       });
       window.location.reload(true);
     } 
   }
 
 
+   const [report, setReport] = useState("");
+   const [reason, setReason] = useState("");
+
+   const handleReport = async (e) => {
+    e.preventDefault();
+ 
+
+    const prodata = {
+       id: uid,
+       report: report,
+       reason: reason,
+     };
+
+     const x = report
+     const y = reason
+
+     console.log(prodata)
+
+     await addDoc(collection(db, "AdminReports"), {
+       id: uid,
+       report: report,
+       reason: reason,
+       timestamp: serverTimestamp()
+     });
+
+    //  const dbbRef = doc(db, "Admin", "admin");
+    //  await updateDoc(dbbRef, {
+    //    reports: (prodata),
+    //  });
+   };
+
+   
+
+
+
 
   useEffect(() => {
     retdata();
-  }, [user]);
+    const timer = setInterval(tick, 1000); // Run the tick function every second
+    return () => clearInterval(timer);
+  }, [user, timeLeft]);
+
+
+
+  
+
+
+
+  
 
   return (
     <>
@@ -143,8 +201,11 @@ function Product1() {
           <div className="col-lg-5">
             <div className="d-flex flex-column h-100">
               <h2 className="mb-1">{userdata?.title}</h2>
-              <h4 className="text-muted">Time Remaining: </h4>
-
+              <h4 className="text-muted">
+                Time Remaining: {days} days {hours} hours {minutes} minutes{" "}
+                {seconds} seconds{" "}
+              </h4>
+              
               <div className="row g-3 mb-4">
                 <div className="col">
                   <button className="btn btn-outline-dark py-2 w-100">
@@ -170,7 +231,6 @@ function Product1() {
                   </Link>
                 </div>
               </div>
-
               <Form onSubmit={UpdateBid}>
                 <Form.Group
                   className="mb-3"
@@ -187,9 +247,7 @@ function Product1() {
                 </Form.Group>
                 <Button type="submit">Submit Bid</Button>
               </Form>
-
               {/* Description of product details */}
-
               <h4 className="mb-0">Details</h4>
               <hr />
               <dl className="row">
@@ -204,7 +262,6 @@ function Product1() {
                 <dt className="col-sm-4">Seller</dt>
                 <dd className="col-sm-8 mb-3">{userdata?.seller}</dd>
               </dl>
-
               <h4 className="mb-0">Description</h4>
               <hr />
               <p className="lead flex-shrink-0">
@@ -220,24 +277,35 @@ function Product1() {
                 <Modal show={show} onHide={handleClose}>
                   <Modal.Header closeButton></Modal.Header>
                   <Modal.Body>
-                    <Form>
+                    <Form onSubmit={handleReport}>
                       <Form.Group
                         className="mb-3"
                         controlId="exampleForm.ControlInput1"
                       >
                         <Form.Label>Reason :</Form.Label>
-                        <Form.Control type="email" autoFocus />
+                        <Form.Control
+                          type="text"
+                          autoFocus
+                          onChange={(e) => setReason(e.target.value)}
+                        />
                       </Form.Group>
+
                       <Form.Group
                         className="mb-3"
                         controlId="exampleForm.ControlTextarea1"
                       >
                         <Form.Label>Report :</Form.Label>
-                        <Form.Control as="textarea" rows={3} />
+                        <Form.Control
+                          as="textarea"
+                          rows={3}
+                          onChange={(e) => setReport(e.target.value)}
+                        />
                       </Form.Group>
+
                       <button
                         style={{ float: "right" }}
                         className="btn btn-dark"
+                        type="submit"
                       >
                         Submit
                       </button>

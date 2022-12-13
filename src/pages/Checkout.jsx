@@ -167,7 +167,7 @@ const CheckoutPage = () => {
       })
 
         // TODO: uncomment before presentation, deletes items when bought
-       //await deleteDoc(doc(db, "Products", x));
+        await deleteDoc(doc(db, "Products", item.id));
      });
 
     //empty cart
@@ -184,8 +184,8 @@ const CheckoutPage = () => {
     await updateDoc(docRef2, {
       money: nu, 
       cartitems: [],
-    });
-    window.location.reload(true);
+    })
+    
 
   };
 

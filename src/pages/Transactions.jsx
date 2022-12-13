@@ -70,7 +70,11 @@ const Transactions = () => {
               <td>${product.price} USD</td>
               <td>{product.seller}</td>
               <td>
-                <input type="number" placeholder="Input Grade (0-5)"/>
+                <input
+                  type="number"
+                  placeholder="Input Grade (0-5)"
+                  onChange={(e) => setRating(e.target.value)}
+                />
               </td>
               <td>
                 <Button variant="secondary">Report</Button>

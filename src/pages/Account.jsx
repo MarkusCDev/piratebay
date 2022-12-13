@@ -167,7 +167,7 @@ if (user.email === "admin@aol.com") {
           </div>
 
           <div className="mb-3">
-            <Link to="AdminReports">
+            <Link to="/account/AdminReports">
               <Button className="" variant="info">
                 Reports
               </Button>

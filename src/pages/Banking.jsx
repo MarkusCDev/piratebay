@@ -61,9 +61,14 @@ const Banking = () => {
 
 
       <div className="mt-3 text-center">
-        <h3 style={{color: 'green'}}>${userdata?.money}</h3>
+        <h1 style={{color: 'green'}}>${userdata?.money}</h1>
       </div>
 
+      <div className="mt-5 text-center" style={{marginBottom: "30px"}}>
+        <h3>Card on File: {userdata?.card}</h3>
+      </div>
+
+    <div className="justify-content-center align-item text-center">
       <div className="mt-3">
         <h3>Deposit</h3>
         <input value={inputDepositRef}
@@ -82,6 +87,8 @@ const Banking = () => {
           onChange={(e) => setWithdrawRef(e.target.value)} />
         <Button style={{ marginLeft: '10px', width: '50px', height: '25px' }} className="btn btn-danger" onClick={handleClick2}></Button>
       </div>
+    </div>
+
     </div>
     </div>
 

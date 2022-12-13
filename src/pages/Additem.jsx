@@ -74,31 +74,32 @@ const Additem = () => {
       storage,
       "product-images${title.toUpperCase()}/${Date.now()}"
     );
+    const num = parseInt(price, 10)
+    const sb = parseInt(startbid, 10)
     uploadBytes(storageRef, image).then(() => {
       getDownloadURL(storageRef).then(async (url) => {
-        await addDoc(collection(db, "Products"), {
+        await addDoc(collection(db, "AdminItems"), {
           seller: user.email,
           title,
           description,
-          price,
+          price: num,
           keywords,
           timelimit,
           image: url,
           imagelink,
           timestamp: serverTimestamp(),
           currentbid: 0,
-          startbid,
+          startbid: sb,
           uid: "",
         })
           .then(async (docRef) => {
             console.log("Document Id:", docRef.id);
 
             console.log(typeof docRef.id);
-            const dref = doc(db, "Products", docRef.id);
+            const dref = doc(db, "AdminItems", docRef.id);
             await updateDoc(dref, {
               uid: docRef.id,
             });
-            navigate("/");
           })
           .catch((error) => {
             console.log("Error adding document:", error);
@@ -213,6 +214,7 @@ const Additem = () => {
             <Form.Label>Buy Now Price</Form.Label>
             <Form.Control
               type="number"
+              patter="[0-1000000]*"
               placeholder="Buy Now Price"
               required
               onChange={(e) => setPrice(e.target.value)}
