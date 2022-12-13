@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+import piratebay from '../images/banners/pirate-bay.png';
+import treasureChest from '../images/banners/treasure-chest.jpg';
+import legendOfTheSea from '../images/banners/legend-of-the-seas.jpg';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import sot1 from "../images/banners/sot1.jpg"
