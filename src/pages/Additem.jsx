@@ -60,6 +60,26 @@ const Additem = () => {
     setTimelimit(event.target.value);
   }
 
+  const handleStartingBid = (event) => {
+    let myValue = event.target.value
+
+    if (typeof myValue === 'string') {
+      // Convert the string to a number
+      myValue = parseInt(myValue, 10);
+    }
+    setStartBid(myValue);
+  }
+
+  const handlePrice = (event) => {
+    let myValue = event.target.value
+
+    if (typeof myValue === 'string') {
+      // Convert the string to a number
+      myValue = parseInt(myValue, 10);
+    }
+    setPrice(myValue);
+  }
+
   const handleTimeLimitBlur = () => {
     if (timelimit === '') {
       // The input is empty, so don't show the alert
@@ -218,7 +238,7 @@ const Additem = () => {
               type="Starting Bid"
               placeholder="Starting Bid"
               required
-              onChange={(e) => setStartBid(e.target.value)}
+              onChange={handleStartingBid}
               value={startbid}
             />
           </Form.Group>
@@ -229,7 +249,7 @@ const Additem = () => {
               type="number"
               placeholder="Buy Now Price"
               required
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={handlePrice}
               value={price}
             />
           </Form.Group>
