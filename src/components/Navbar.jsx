@@ -20,7 +20,9 @@ import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const { user, logOut } = useUserAuth();
+
   const [userdata, setUserData] = useState(null);
+
   const retdata = async () => {
     const docRef = doc(db, "Users", user.email);
     const docSnap = await getDoc(docRef);
@@ -118,6 +120,7 @@ const Navbar = () => {
           <Link className="navbar-brand" to="/">
             <span className="ms-2 h5">PirateBay</span>
           </Link>
+
           <div className={"navbar-collapse offcanvas-collapse "}>
             <ul className="navbar-nav me-auto mb-lg-0">
               <li className="nav-item">
@@ -163,6 +166,7 @@ const Navbar = () => {
                 {userdata?.fname} {userdata?.lname}
               </button>
             </Link>
+
             <button
               onClick={handleLogout}
               className="btn btn-primary"

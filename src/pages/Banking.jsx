@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useUserAuth } from "../context/UserAuthContext";
 import { db } from "../firebase-config";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { useRef } from "react";
 import { Button } from "react-bootstrap";
 
+
 const Banking = () => {
-  const { user } = useUserAuth();
+  const Deposit = () => { }
+  const [counter, setCounter] = useState(0)
+  const { user, logOut } = useUserAuth();
   const [inputDepositRef, setDepositRef] = useState(0)
   const [inputWithdrawRef, setWithdrawRef] = useState(0)
   const handleClick1 = async () => {
@@ -51,7 +55,7 @@ const Banking = () => {
   }, [user])
 
   return (
-    <div className='row-cols-lg-3 g-4 px-md-5' style={{ marginTop: '200px' }}>
+    <div className='row-cols-lg-3 g-4 px-md-5' style={{marginTop: '200px'}}>
       <div className='justify-content-center align-items container shadow p-3 mb-5 bg-white rounded' >
       <h3 className='text-center'>Banking</h3>
 

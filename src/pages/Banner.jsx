@@ -23,11 +23,14 @@ export default class Banner extends Component {
         return (
             <div style={{ paddingTop: 10, }}>
                 <Slider {...settings}>
+                    
                     <div className="d-flex justify-content-center">
+                        
                         <img src={kraken} alt="background" style={{ height: '500px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover' }}></img>
                         <figcaption>
                             Welcome to PirateBay
                         </figcaption>
+
                     </div>
                     <div className="d-flex justify-content-center">
                         <img src={sot1} alt="background" style={{ height: '500px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover' }}></img>
@@ -36,12 +39,13 @@ export default class Banner extends Component {
                         </figcaption>
                     </div>
                     <div className="d-flex justify-content-center">
-
+                        
                         <img src={sot2} alt="background" style={{ height: '500px', width: '100%', filter: 'brightness(75%)', objectFit: 'cover' }}></img>
                         <figcaption>
                             Explore Treasure
                         </figcaption>
                     </div>
+                   
                 </Slider>
             </div>
         );

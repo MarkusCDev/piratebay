@@ -34,7 +34,6 @@ import Transactions from "./pages/Transactions";
 import AdminUserData from "./pages/AdminUserData";
 import AdminReports from "./pages/AdminReports";
 import AdminOUApp from "./pages/AdminOUApp";
-import RatingPopup from './pages/RatingPopup';
 import AdminNewItems from "./pages/AdminNewItems";
 
 const App = () => {
@@ -100,12 +99,14 @@ const App = () => {
         />
         <Route path="/banner" element={<Banner />} />
         <Route path="/account/transaction-history" element={ <ProtectedRoute><Transactions /></ProtectedRoute> }/>
+
       {/* Admin routes   */}
+
       <Route path="/account/AdminUserData" element={ <ProtectedRoute><AdminUserData /></ProtectedRoute> }/>
       <Route path="/account/AdminReports" element={ <ProtectedRoute><AdminReports /></ProtectedRoute> }/>
       <Route path="/account/AdminOUApp" element={ <ProtectedRoute><AdminOUApp /></ProtectedRoute> }/>
       <Route path="/account/AdminNewItems" element={ <ProtectedRoute><AdminNewItems /></ProtectedRoute> }/>
-        <Route path="/rating" element={<RatingPopup />} />
+        
       </Routes>
       <Footer />
     </UserAuthContextProvider>

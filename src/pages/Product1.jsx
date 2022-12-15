@@ -4,8 +4,7 @@ import { useUserAuth } from "../context/UserAuthContext";
 import { db } from "../firebase-config";
 import { getDoc, doc, updateDoc, arrayUnion, addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { Button, Form } from "react-bootstrap";
-import { getDoc, doc } from "firebase/firestore";
-import Form from 'react-bootstrap/Form';
+
 import Modal from "react-bootstrap/Modal";
 
 function Product1() {
@@ -15,19 +14,6 @@ function Product1() {
   const [userr, setUserr] = useState(null);
   const [newbid, setBid] = useState(0);
   const [getrating, setRating] = useState(0);
-  const [userr] = useState(null);
-
-  const [timeLeft, setTimeLeft] = useState(Math.floor(Math.random() * 604800));
-
-  const tick = async () => {
-    if (timeLeft > 0) {
-      setTimeLeft(timeLeft - 1);
-    }
-  }
-  const days = Math.floor(timeLeft / 86400);
-  const hours = Math.floor(timeLeft % 86400 / 3600);
-  const minutes = Math.floor(timeLeft % 3600 / 60);
-  const seconds = timeLeft % 60;
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -105,12 +91,6 @@ function Product1() {
 
     const x = uid;
     const docRef = doc(db, "Products", x);
-    if (x == y) {
-      console.log("same")
-    } else {
-      console.log("not same")
-    }
-    const docRef = doc(db, "Products", x)
     const docSnap = await getDoc(docRef)
     const highestbid = parseInt(newbid, 10); 
 

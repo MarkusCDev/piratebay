@@ -74,7 +74,6 @@ const stateOptions = [
   { key: "DC", text: "District of Columbia", value: "District of Columbia" },
 ];
 
-
 const CheckoutPage = () => {
   const { user } = useUserAuth();
   // User info
@@ -120,6 +119,11 @@ const CheckoutPage = () => {
     if (docSnap.data().cartitems.length == 0 | docSnap.data().money < totalPrice){
       navigate("/");
     }
+
+
+
+
+
   };
 
   ;

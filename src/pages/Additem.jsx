@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
 import { storage } from "../firebase-config";
@@ -32,6 +33,7 @@ const Additem = () => {
   const [image, setImage] = useState(null);
   const [imagelink, setImageLink] = useState("");
   const [startbid, setStartBid] = useState(0);
+
   const [imageError, setImageError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [uploadError, setUploadError] = useState("");
@@ -53,26 +55,9 @@ const Additem = () => {
     } else {
       console.log("please select your file");
     }
-    else {
-      console.log('Please select your file');
-    }
-  }
+  };
 
-  const handleTimeLimit = (event) => {
-    setTimelimit(event.target.value);
-  }
-
-  const handleTimeLimitBlur = () => {
-    if (timelimit === '') {
-      // The input is empty, so don't show the alert
-      return;
-    }
-
-    if (timelimit < 1) {
-      alert('Please put at least 1 day for the auction timelimit.');
-    }
-  }
-
+  //const dbRef = collection(db, "Products")
   const { user } = useUserAuth();
   const data = {
     seller: user.email,
@@ -154,6 +139,7 @@ const Additem = () => {
   //     console.log("No such document!")
   //   }
   // }
+
   return (
     <>
       <div style={{ marginTop: "200px" }}></div>
@@ -169,7 +155,6 @@ const Additem = () => {
         )}
         {/* <Button onClick={retdata}>Count</Button> */}
         <Form onSubmit={handleAddProducts}>
-
           <Form.Group className="mb-3" controlId="formBasicTitle">
             <Form.Label>Title</Form.Label>
             <Form.Control
@@ -206,11 +191,10 @@ const Additem = () => {
           <Form.Group className="mb-3" controlId="formBasicTimelimit">
             <Form.Label>Time limit</Form.Label>
             <Form.Control
-              type="number"
-              placeholder="Auction Timelimit in day/days"
+              type="timelimit"
+              placeholder="Auction Timelimit"
               required
-              onChange={handleTimeLimit}
-              onBlur={handleTimeLimitBlur}
+              onChange={(e) => setTimelimit(e.target.value)}
               value={timelimit}
             />
           </Form.Group>
@@ -281,7 +265,6 @@ const Additem = () => {
               Submit Item Request
             </Button>
           </div>
-
         </Form>
 
         {uploadError && (
