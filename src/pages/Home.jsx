@@ -44,6 +44,7 @@ const Home = () => {
 
   var sixArr = productarray.slice(0, 6);
 
+  var sixArr = productarray.slice(0, 6)
   // const retdata3 = async () => {
 
   //     const dbRef = collection(db, "Products")
@@ -53,7 +54,6 @@ const Home = () => {
   //       setProductArray(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
   //     )
   // }
-
   return (
     <>
       <div style={{ paddingTop: 18 }}>
@@ -79,7 +79,6 @@ const Home = () => {
           {/* {Array.from({ length: 6 }, (_, i) => {
             return <PopularProduct pro_img={pro_img} pro_title={pro_title} pro_price={pro_price} key={i} />;
           })} */}
-
           {sixArr.map((product) => (
             <PopularProduct
               pro_img={product.imagelink}

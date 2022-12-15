@@ -4,7 +4,7 @@ import { Form, Alert } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useUserAuth } from "../context/UserAuthContext";
 import { db } from "../firebase-config";
-import { setDoc, doc, addDoc, collection } from "firebase/firestore";
+import { setDoc, doc, collection } from "firebase/firestore";
 
 const Signup = () => {
   const [money, setMoney] = useState(0);

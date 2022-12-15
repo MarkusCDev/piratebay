@@ -29,7 +29,6 @@ const PopularProduct = ({
           <p className="card-text text-center text-muted">${pro_price} USD</p>
           {/* <p className="card-text text-center text-muted">Rating: {pro_rating}</p> */}
           {/* <p className="card-text text-center text-muted">{redirect}</p> */}
-
           <div className="d-grid gap-2">
             <Link to={redirect} className="btn btn-outline-dark" replace>
               View Product

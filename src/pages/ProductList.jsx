@@ -128,7 +128,7 @@ function ProductList() {
                   aria-label="search input"
                   onChange={(e) => setSearch(e.target.value)}
                 />
-                <button className="btn btn-outline-dark">
+                <button className="btn btn-outline-dark">dbwork
                   <img
                     src={searchimg}
                     alt="search icon"
@@ -142,6 +142,13 @@ function ProductList() {
             className={
               "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4 px-md-5 flex-shrink-0 " +
               (viewType.grid ? "row-cols-xl-3" : "row-cols-xl-2")
+              (viewType.grid ? "row-cols-xl-3" : "row-cols-xl-2")}>
+            {
+              productarray.filter((product) => {
+                return search.toLowerCase() === '' ? product : product.title.toLowerCase().includes(search)
+              }).map((product) => (
+                <PopularProduct key={product.uid} pro_img={product.imagelink} pro_title={product.title} pro_price={product.price} pro_uid={product.uid} />
+              ))
             }
           >
             {productarray
